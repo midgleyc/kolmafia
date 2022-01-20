@@ -138,6 +138,7 @@ public class RelayRequest extends PasswordHashRequest {
   private static final String CONFIRM_RALPH = "confirm28";
   private static final String CONFIRM_RALPH1 = "confirm29";
   private static final String CONFIRM_RALPH2 = "confirm30";
+  private static final String CONFIRM_CURSED_MAGNIFYING_GLASS = "confirm31";
 
   private static boolean ignoreBoringDoorsWarning = false;
   private static boolean ignoreDesertWarning = false;
@@ -2582,6 +2583,35 @@ public class RelayRequest extends PasswordHashRequest {
     return false;
   }
 
+  private boolean sendCursedMagnifyingGlassWarning() {
+    // Player doesn't care about void monster warnings
+    if (!Preferences.getBoolean("warnVoidMonster")) {
+      return false;
+    }
+
+    // If a monster is not due, don't worry
+    if (Preferences.getInteger("cursedMagnifyingGlassCount") != 13) {
+      return false;
+    }
+
+    // without the glass, monsters don't show up
+    if (!KoLCharacter.hasEquipped(ItemPool.CURSED_MAGNIFYING_GLASS)) {
+      return false;
+    }
+
+    // If the player has said they want to move on, cool
+    if (this.getFormField(CONFIRM_CURSED_MAGNIFYING_GLASS) != null) {
+      return false;
+    }
+
+    this.sendGeneralWarning(
+        "cursedmag.gif",
+        "You have a void monster due. Confirm you're in the desired zone, then click the magnifying glass.",
+        CONFIRM_CURSED_MAGNIFYING_GLASS);
+
+    return true;
+  }
+
   public void sendGeneralWarning(final String image, final String message, final String confirm) {
     this.sendGeneralWarning(image, message, confirm, null, false);
   }
@@ -3429,6 +3459,10 @@ public class RelayRequest extends PasswordHashRequest {
     }
 
     if (this.sendHardcorePVPWarning(urlString)) {
+      return true;
+    }
+
+    if (adventureName != null && this.sendCursedMagnifyingGlassWarning()) {
       return true;
     }
 
