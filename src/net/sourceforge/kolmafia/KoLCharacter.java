@@ -436,6 +436,7 @@ public abstract class KoLCharacter {
 
     KoLCharacter.battleSkillNames.clear();
     KoLCharacter.battleSkillNames.add("attack with weapon");
+    KoLCharacter.battleSkillNames.add("do nothing");
     KoLCharacter.battleSkillNames.add("custom combat script");
     KoLCharacter.battleSkillNames.add("delevel and plink");
 

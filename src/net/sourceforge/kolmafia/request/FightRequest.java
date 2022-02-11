@@ -1908,6 +1908,11 @@ public class FightRequest extends GenericRequest {
 
     this.constructURLString("fight.php");
 
+    // user would prefer Mafia not get into fights
+    if (Preferences.getString("battleAction").equals("do nothing")) {
+      return;
+    }
+
     try {
       FightRequest.isAutomatingFight = true;
 

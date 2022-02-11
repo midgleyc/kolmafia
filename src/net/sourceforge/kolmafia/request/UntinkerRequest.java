@@ -220,7 +220,7 @@ public class UntinkerRequest extends GenericRequest {
     AdventureResult sideTripItem = UntinkerRequest.SCREWDRIVER.getNegation();
 
     String action = Preferences.getString("battleAction");
-    if (action.contains("dictionary")) {
+    if (action.contains("dictionary") || action.equals("do nothing")) {
       KoLmafiaCLI.DEFAULT_SHELL.executeCommand("set", "battleAction=attack");
     }
 
