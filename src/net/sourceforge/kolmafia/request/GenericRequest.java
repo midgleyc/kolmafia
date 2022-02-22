@@ -4,15 +4,15 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
 import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.net.UnknownHostException;
+import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -68,6 +68,7 @@ import net.sourceforge.kolmafia.textui.ScriptRuntime;
 import net.sourceforge.kolmafia.textui.parsetree.Value;
 import net.sourceforge.kolmafia.utilities.ByteBufferUtilities;
 import net.sourceforge.kolmafia.utilities.FileUtilities;
+import net.sourceforge.kolmafia.utilities.HttpClientWrapper;
 import net.sourceforge.kolmafia.utilities.HttpUtilities;
 import net.sourceforge.kolmafia.utilities.InputFieldUtilities;
 import net.sourceforge.kolmafia.utilities.PauseObject;
@@ -135,9 +136,9 @@ public class GenericRequest implements Runnable {
   private byte[] dataString = null;
 
   public int responseCode;
-  public String responseMessage;
   public String responseText;
-  public HttpURLConnection formConnection;
+  public HttpClientWrapper formConnection;
+  public HttpResponse<InputStream> formResponse;
   public String redirectLocation;
   public String redirectMethod;
 
@@ -1384,15 +1385,15 @@ public class GenericRequest implements Runnable {
     // the connection.
 
     this.responseCode = 0;
-    this.responseMessage = null;
     this.responseText = null;
     this.redirectLocation = null;
     this.redirectMethod = null;
     this.formConnection = null;
+    this.formResponse = null;
 
     try {
       this.formURL = this.buildURL();
-      this.formConnection = HttpUtilities.openConnection(this.formURL);
+      this.formConnection = HttpUtilities.getHttpWrapper(this.formURL.toURI());
     } catch (IOException e) {
       if (this.shouldUpdateDebugLog()) {
         String message =
@@ -1401,13 +1402,14 @@ public class GenericRequest implements Runnable {
       }
 
       return false;
+    } catch (URISyntaxException e) {
+      if (this.shouldUpdateDebugLog()) {
+        String message = "Failed to convert \"" + this.getURLString() + "\" to URI.";
+        StaticEntity.printStackTrace(e, message);
+      }
+
+      return false;
     }
-
-    this.formConnection.setDoInput(true);
-
-    this.formConnection.setDoOutput(!this.data.isEmpty());
-    this.formConnection.setUseCaches(false);
-    this.formConnection.setInstanceFollowRedirects(false);
 
     if (!this.isExternalRequest && GenericRequest.sessionId != null) {
       this.formConnection.addRequestProperty("Cookie", this.getCookies());
@@ -1465,7 +1467,7 @@ public class GenericRequest implements Runnable {
       // Field: Set-Cookie = [PHPSESSID=i9tr5te1hhk7084d7do6s877h3; path=/,
       // AWSALB=1HOUaMRO89JYkb8nBfrsK6maRGcdoJpTOmxa/LEVbQsBnwi1jPq7jvG2jw1m4p1SR7Y35Wq/dUKVBG5RcvMu7Zw89U1RAeBkZlIkGP/8hVnXCmkWUxfEvuveJZfB; Expires=Fri, 16-Sep-2016 15:43:04 GMT; Path=/]
 
-      Map<String, List<String>> headerFields = this.formConnection.getHeaderFields();
+      Map<String, List<String>> headerFields = this.formResponse.headers().map();
 
       for (Entry<String, List<String>> entry : headerFields.entrySet()) {
         String key = entry.getKey();
@@ -1557,14 +1559,8 @@ public class GenericRequest implements Runnable {
     }
 
     try {
-      this.formConnection.setRequestMethod("POST");
-      OutputStream ostream = this.formConnection.getOutputStream();
-      ostream.write(this.dataString);
-
-      ostream.flush();
-      ostream.close();
-
-      ostream = null;
+      this.formConnection.setupPostData(this.dataString);
+      this.formResponse = this.formConnection.sendForInputStream();
       return false;
     } catch (SocketTimeoutException e) {
       ++this.timeoutCount;
@@ -1576,7 +1572,7 @@ public class GenericRequest implements Runnable {
       }
 
       return KoLmafia.refusesContinue();
-    } catch (IOException e) {
+    } catch (IOException | InterruptedException e) {
       String message =
           "IOException during data post (" + this.getURLString() + "): " + e.getMessage() + ".";
 
@@ -1608,11 +1604,12 @@ public class GenericRequest implements Runnable {
     this.responseText = "";
 
     try {
-      istream = this.formConnection.getInputStream();
-      if ("gzip".equals(this.formConnection.getContentEncoding())) {
+      this.formResponse = this.formConnection.sendForInputStream();
+      istream = this.formResponse.body();
+      if ("gzip".equals(this.formResponse.headers().firstValue("Content-Encoding").orElse(""))) {
         istream = new GZIPInputStream(istream);
       }
-      this.responseCode = this.formConnection.getResponseCode();
+      this.responseCode = this.formResponse.statusCode();
 
       // Handle HTTP 3xx Redirections
       if (this.responseCode > 300 && this.responseCode < 309) {
@@ -1625,30 +1622,34 @@ public class GenericRequest implements Runnable {
           case 301:
           case 307:
           case 308:
-            if (this instanceof RelayRequest
-                || this.redirectMethod.equals("GET")
-                || this.redirectMethod.equals("HEAD")) {
-              // RelayRequests are handled later. Allow GET/HEAD, redirects by default.
-              this.redirectLocation = this.formConnection.getHeaderField("Location");
-            } else {
-              // RFC 2616: For requests other than GET or HEAD, the user agent MUST NOT
-              // automatically redirect the request unless it can be confirmed by the user.
-              if (this.allowRedirect == null) {
-                String message =
-                    "You are being redirected to \""
-                        + this.formConnection.getHeaderField("Location")
-                        + "\".\n"
-                        + "Would you like KoLmafia to resend the form data?";
-                this.allowRedirect = InputFieldUtilities.confirm(message);
-              }
+            {
+              var locationHeader = this.formResponse.headers().firstValue("Location");
+              if (locationHeader.isPresent()) {
+                var location = locationHeader.get();
+                if (this instanceof RelayRequest
+                    || this.redirectMethod.equals("GET")
+                    || this.redirectMethod.equals("HEAD")) {
+                  // RelayRequests are handled later. Allow GET/HEAD, redirects by default.
+                  this.redirectLocation = location;
+                } else {
+                  // RFC 2616: For requests other than GET or HEAD, the user agent MUST NOT
+                  // automatically redirect the request unless it can be confirmed by the user.
+                  if (this.allowRedirect == null) {
+                    String message =
+                        "You are being redirected to \""
+                            + location
+                            + "\".\n"
+                            + "Would you like KoLmafia to resend the form data?";
+                    this.allowRedirect = InputFieldUtilities.confirm(message);
+                  }
 
-              if (this.allowRedirect.booleanValue()) {
-                this.redirectLocation =
-                    this.data.isEmpty()
-                        ? this.formConnection.getHeaderField("Location")
-                        : this.formConnection.getHeaderField("Location")
-                            + "?"
-                            + this.getDisplayDataString();
+                  if (this.allowRedirect.booleanValue()) {
+                    this.redirectLocation =
+                        this.data.isEmpty()
+                            ? location
+                            : location + "?" + this.getDisplayDataString();
+                  }
+                }
               }
             }
             break;
@@ -1672,9 +1673,8 @@ public class GenericRequest implements Runnable {
 
       ++this.timeoutCount;
       return !shouldRetry || KoLmafia.refusesContinue();
-    } catch (IOException e) {
+    } catch (IOException | InterruptedException e) {
       this.responseCode = this.getResponseCode();
-      this.responseMessage = this.getResponseMessage();
 
       if (this.responseCode == 504
           && (this.baseURLString.equals("storage.php")
@@ -1691,12 +1691,7 @@ public class GenericRequest implements Runnable {
 
       if (this.responseCode != 0) {
         String message =
-            "Server returned response code "
-                + this.responseCode
-                + " ("
-                + this.responseMessage
-                + ") for "
-                + this.baseURLString;
+            "Server returned response code " + this.responseCode + " for " + this.baseURLString;
         KoLmafia.updateDisplay(MafiaState.ERROR, message);
       }
 
@@ -1763,25 +1758,11 @@ public class GenericRequest implements Runnable {
   }
 
   private int getResponseCode() {
-    if (this.formConnection != null) {
-      try {
-        return this.formConnection.getResponseCode();
-      } catch (IOException e) {
-      }
+    if (this.formResponse != null) {
+      return this.formResponse.statusCode();
     }
 
     return 0;
-  }
-
-  private String getResponseMessage() {
-    if (this.formConnection != null) {
-      try {
-        return this.formConnection.getResponseMessage();
-      } catch (IOException e) {
-      }
-    }
-
-    return "";
   }
 
   private static void forceClose(final InputStream stream) {
@@ -2161,8 +2142,9 @@ public class GenericRequest implements Runnable {
 
     String urlString = this.getURLString();
     if (urlString.startsWith("charpane.php")) {
-      long responseTimestamp =
-          this.formConnection.getHeaderFieldDate("Date", System.currentTimeMillis());
+      var dateHeader = this.formResponse.headers().firstValue("Date");
+      var now = System.currentTimeMillis();
+      long responseTimestamp = dateHeader.map(x -> StringUtilities.parseDate(x, now)).orElse(now);
 
       if (!CharPaneRequest.processResults(responseTimestamp, this.responseText)) {
         this.responseCode = 304;
@@ -3014,11 +2996,11 @@ public class GenericRequest implements Runnable {
   }
 
   public static synchronized void printRequestProperties(
-      final String URL, final HttpURLConnection formConnection) {
+      final String URL, final HttpClientWrapper formConnection) {
     RequestLogger.updateDebugLog();
     RequestLogger.updateDebugLog("Requesting: " + URL);
 
-    Map<String, List<String>> requestProperties = formConnection.getRequestProperties();
+    Map<String, List<String>> requestProperties = formConnection.getHeaders();
     RequestLogger.updateDebugLog(requestProperties.size() + " request properties");
 
     for (Entry<String, List<String>> entry : requestProperties.entrySet()) {
@@ -3029,15 +3011,15 @@ public class GenericRequest implements Runnable {
   }
 
   public void printHeaderFields() {
-    GenericRequest.printHeaderFields(this.requestURL(), this.formConnection);
+    GenericRequest.printHeaderFields(this.requestURL(), this.formResponse);
   }
 
-  public static synchronized void printHeaderFields(
-      final String URL, final HttpURLConnection formConnection) {
+  public static synchronized <T> void printHeaderFields(
+      final String URL, final HttpResponse<T> formConnection) {
     RequestLogger.updateDebugLog();
     RequestLogger.updateDebugLog("Retrieved: " + URL);
 
-    Map<String, List<String>> headerFields = formConnection.getHeaderFields();
+    Map<String, List<String>> headerFields = formConnection.headers().map();
     RequestLogger.updateDebugLog(headerFields.size() + " header fields");
 
     for (Entry<String, List<String>> entry : headerFields.entrySet()) {

@@ -404,7 +404,7 @@ public class RelayRequest extends PasswordHashRequest {
       // This is a response from KoL.
       // Send down any headers KoL generated
 
-      Map<String, List<String>> headerFields = this.formConnection.getHeaderFields();
+      Map<String, List<String>> headerFields = this.formResponse.headers().map();
 
       for (Entry<String, List<String>> entry : headerFields.entrySet()) {
         String key = entry.getKey();
@@ -480,9 +480,9 @@ public class RelayRequest extends PasswordHashRequest {
       return "";
     }
 
-    if (this.formConnection != null) {
+    if (this.formResponse != null) {
       // This is a response from KoL.
-      return this.formConnection.getHeaderField(field);
+      return this.formResponse.headers().firstValue(field).orElse(null);
     }
 
     return "";

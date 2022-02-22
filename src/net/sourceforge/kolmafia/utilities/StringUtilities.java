@@ -47,13 +47,17 @@ public class StringUtilities {
   private StringUtilities() {}
 
   public static final synchronized long parseDate(final String dateString) {
+    return parseDate(dateString, 0);
+  }
+
+  public static final synchronized long parseDate(final String dateString, long defaultValue) {
     if (dateString != null) {
       try {
         return StringUtilities.DATE_FORMAT.parse(dateString).getTime();
       } catch (Exception e) {
       }
     }
-    return 0;
+    return defaultValue;
   }
 
   public static final String formatDate(final long date) {

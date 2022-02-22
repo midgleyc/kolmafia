@@ -5,8 +5,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.regex.Matcher;
@@ -77,25 +77,31 @@ public class DebugDatabase {
   private static String readWikiData(String url) {
     while (true) {
       try {
-        HttpURLConnection connection = HttpUtilities.openConnection(new URL(null, url));
+        HttpClientWrapper connection = HttpUtilities.getHttpWrapper(new URI(url));
         connection.setRequestProperty("Connection", "close"); // no need to keep-alive
-        InputStream istream = connection.getInputStream();
+        var response = connection.sendForInputStream();
 
-        int responseCode = connection.getResponseCode();
+        int responseCode = response.statusCode();
         if (responseCode == 200) {
+          InputStream istream = response.body();
           byte[] bytes = ByteBufferUtilities.read(istream);
           return StringUtilities.getEncodedString(bytes, "UTF-8");
         }
         if (301 <= responseCode && responseCode <= 308) {
-          String redirectLocation = connection.getHeaderField("Location");
-          System.out.println(url + " => " + redirectLocation);
-          url = redirectLocation;
-          continue;
+          var locationHeader = response.headers().firstValue("Location");
+          if (locationHeader.isPresent()) {
+            var redirectLocation = locationHeader.get();
+            System.out.println(url + " => " + redirectLocation);
+            url = redirectLocation;
+            continue;
+          } else {
+            return "";
+          }
         }
 
         return "";
 
-      } catch (IOException e) {
+      } catch (IOException | URISyntaxException | InterruptedException e) {
         return "";
       }
     }
