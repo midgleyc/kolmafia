@@ -1602,7 +1602,9 @@ public class GenericRequest implements Runnable {
     this.responseText = "";
 
     try {
-      this.formResponse = this.formConnection.sendForInputStream();
+      if (!this.formConnection.haveSentRequest()) {
+        this.formResponse = this.formConnection.sendForInputStream();
+      }
       istream = this.formResponse.body();
       if ("gzip".equals(this.formResponse.headers().firstValue("Content-Encoding").orElse(""))) {
         istream = new GZIPInputStream(istream);

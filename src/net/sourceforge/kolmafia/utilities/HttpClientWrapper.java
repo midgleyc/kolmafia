@@ -14,6 +14,7 @@ import java.util.Map;
 public class HttpClientWrapper {
   private final HttpClient.Builder clientBuilder;
   private final HttpRequest.Builder requestBuilder;
+  private boolean sentRequest = false;
 
   public HttpClientWrapper() {
     this(HttpClient.newBuilder(), HttpRequest.newBuilder());
@@ -22,6 +23,10 @@ public class HttpClientWrapper {
   public HttpClientWrapper(HttpClient.Builder clientBuilder, HttpRequest.Builder requestBuilder) {
     this.clientBuilder = clientBuilder;
     this.requestBuilder = requestBuilder;
+  }
+
+  public boolean haveSentRequest() {
+    return sentRequest;
   }
 
   public Map<String, List<String>> getHeaders() {
@@ -61,6 +66,7 @@ public class HttpClientWrapper {
   public HttpResponse<InputStream> sendForInputStream() throws IOException, InterruptedException {
     var client = this.clientBuilder.build();
     var request = this.requestBuilder.build();
+    sentRequest = true;
     return client.send(request, BodyHandlers.ofInputStream());
   }
 }
