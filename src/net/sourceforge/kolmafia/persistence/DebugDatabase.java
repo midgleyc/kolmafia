@@ -78,7 +78,6 @@ public class DebugDatabase {
     while (true) {
       try {
         HttpClientWrapper connection = HttpUtilities.getHttpWrapper(new URI(url));
-        connection.setRequestProperty("Connection", "close"); // no need to keep-alive
         var response = connection.sendForInputStream();
 
         int responseCode = response.statusCode();
