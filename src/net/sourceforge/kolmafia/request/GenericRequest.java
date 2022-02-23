@@ -1425,8 +1425,6 @@ public class GenericRequest implements Runnable {
       }
 
       this.formConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-      this.formConnection.setRequestProperty(
-          "Content-Length", String.valueOf(this.dataString.length));
     }
 
     return true;
