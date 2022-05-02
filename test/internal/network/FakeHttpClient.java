@@ -17,23 +17,47 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 import java.util.concurrent.SubmissionPublisher;
+import java.util.function.Function;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLParameters;
 
 public class FakeHttpClient extends HttpClient {
 
   private final List<HttpRequest> requests = new ArrayList<>();
-  private int responseCode = 0;
-  private String response = "";
+
+  private static class Response {
+    public int responseCode;
+    public String responseBody;
+
+    public Response(int responseCode, String responseBody) {
+      this.responseCode = responseCode;
+      this.responseBody = responseBody;
+    }
+  }
+
+  private final Map<Function<HttpRequest, Boolean>, Response> responses = new HashMap<>();
 
   public void setResponse(int responseCode, String response) {
-    this.responseCode = responseCode;
-    this.response = response;
+    setResponse((r) -> true, responseCode, response);
+  }
+
+  public void setResponse(Function<HttpRequest, Boolean> requestMatcher, int responseCode, String response) {
+    responses.put(requestMatcher, new Response(responseCode, response));
+  }
+
+  private Response getResponse(HttpRequest request) {
+    for (var entry : responses.entrySet()) {
+      if (entry.getKey().apply(request)) {
+        return entry.getValue();
+      }
+    }
+    return new Response(0, "");
   }
 
   public List<HttpRequest> getRequests() {
@@ -48,8 +72,7 @@ public class FakeHttpClient extends HttpClient {
 
   public void clear() {
     this.requests.clear();
-    this.responseCode = 0;
-    this.response = "";
+    this.responses.clear();
   }
 
   @Override
@@ -104,17 +127,19 @@ public class FakeHttpClient extends HttpClient {
 
     T body;
 
-    var subscriber = responseBodyHandler.apply(new ResponseInfoImpl(responseCode));
+    var response = getResponse(request);
+
+    var subscriber = responseBodyHandler.apply(new ResponseInfoImpl(response.responseCode));
     var publisher = new SubmissionPublisher<List<ByteBuffer>>();
     publisher.subscribe(subscriber);
-    publisher.submit(List.of(ByteBuffer.wrap(response.getBytes(StandardCharsets.UTF_8))));
+    publisher.submit(List.of(ByteBuffer.wrap(response.responseBody.getBytes(StandardCharsets.UTF_8))));
     publisher.close();
     try {
       body = subscriber.getBody().toCompletableFuture().get();
     } catch (InterruptedException | ExecutionException e) {
       body = null;
     }
-    return new FakeHttpResponse<>(responseCode, body);
+    return new FakeHttpResponse<>(response.responseCode, body);
   }
 
   @Override

@@ -18,6 +18,14 @@ public class HttpClientWrapper {
     return fakeClientBuilder.client.getLastRequest();
   }
 
+  public static void setResponse(String target, String response) {
+    fakeClientBuilder.client.setResponse((req) -> req.uri().toString().endsWith(target), 200, response);
+  }
+
+  public static void familiarRequestSucceeds(String famName) {
+    fakeClientBuilder.client.setResponse((req) -> req.uri().toString().endsWith("familiar.php"), 200, "You take " + famName + " with you.");
+  }
+
   public static void setupFakeClient() {
     GenericRequest.sessionId = "real"; // do "send" requests
     HttpUtilities.setClientBuilder(() -> fakeClientBuilder);

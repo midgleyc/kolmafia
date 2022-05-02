@@ -3,25 +3,33 @@ package net.sourceforge.kolmafia.textui.command;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 
+import internal.helpers.HttpClientWrapper;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import net.sourceforge.kolmafia.FamiliarData;
 import net.sourceforge.kolmafia.KoLCharacter;
 import net.sourceforge.kolmafia.objectpool.FamiliarPool;
-import net.sourceforge.kolmafia.request.GenericRequest;
-import net.sourceforge.kolmafia.session.HeistManager;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class HeistCommandTest extends AbstractCommandTestBase {
+
+  public static String heistText;
+
+  @BeforeAll
+  public static void setup() throws IOException {
+    heistText = Files.readString(Paths.get("request/test_heist_command.html"));
+  }
+
   @BeforeEach
   public void initEach() {
     KoLCharacter.reset("testUser");
-    new HeistCommandFakeRequest().register("heistFake");
 
-    // Stop requests from actually running
-    GenericRequest.sessionId = null;
+    HttpClientWrapper.setupFakeClient();
+    HttpClientWrapper.setResponse("main.php", heistText);
+    HttpClientWrapper.familiarRequestSucceeds("Cat Burglar");
   }
 
   public HeistCommandTest() {
@@ -54,7 +62,6 @@ public class HeistCommandTest extends AbstractCommandTestBase {
   @Test
   void parsesHeistPage() {
     setCatBurglar();
-    this.command = "heistFake";
     String output = execute("");
 
     assertThat(output, containsString("You have 42 heists."));
@@ -67,7 +74,6 @@ public class HeistCommandTest extends AbstractCommandTestBase {
   @Test
   void doesNotHeistInvalidItem() {
     setCatBurglar();
-    this.command = "heistFake";
     String output = execute("334 scroll");
 
     assertThat(output, containsString("Could not find 334 scroll to heist"));
@@ -77,7 +83,6 @@ public class HeistCommandTest extends AbstractCommandTestBase {
   @Test
   void heistsValidItemExact() {
     setCatBurglar();
-    this.command = "heistFake";
     String output = execute("ratty knitted cap");
 
     assertThat(output, containsString("Heisted ratty knitted cap"));
@@ -87,7 +92,6 @@ public class HeistCommandTest extends AbstractCommandTestBase {
   @Test
   void heistsValidItem() {
     setCatBurglar();
-    this.command = "heistFake";
     String output = execute("Purple Beast");
 
     assertThat(output, containsString("Heisted Purple Beast energy drink"));
@@ -97,7 +101,6 @@ public class HeistCommandTest extends AbstractCommandTestBase {
   @Test
   void heistsValidItemWithQuotes() {
     setCatBurglar();
-    this.command = "heistFake";
     String output = execute("\"meat\" stick");
 
     assertThat(output, containsString("Heisted &quot;meat&quot; stick"));
@@ -107,27 +110,9 @@ public class HeistCommandTest extends AbstractCommandTestBase {
   @Test
   void heistsMultipleValidItem() {
     setCatBurglar();
-    this.command = "heistFake";
     String output = execute("13 Purple Beast");
 
     assertThat(output, containsString("Heisted 13 Purple Beast energy drinks"));
     assertContinueState();
-  }
-
-  public static class HeistCommandFakeRequest extends HeistCommand {
-    @Override
-    protected HeistManager heistManager() {
-      class HeistManagerFakeRequest extends HeistManager {
-        @Override
-        protected String heistRequest() {
-          try {
-            return Files.readString(Paths.get("request/test_heist_command.html"));
-          } catch (IOException e) {
-            throw new RuntimeException("could not find test HTML");
-          }
-        }
-      }
-      return new HeistManagerFakeRequest();
-    }
   }
 }

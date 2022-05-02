@@ -35,7 +35,7 @@ public class HeistCommand extends AbstractCommand {
     } else {
       heistItem(parameter);
     }
-    FamiliarManager.changeFamiliar(current);
+    FamiliarManager.changeFamiliar(current, false);
   }
 
   private void showAllItems() {
