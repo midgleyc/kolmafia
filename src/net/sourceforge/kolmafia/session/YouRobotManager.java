@@ -1,6 +1,7 @@
 package net.sourceforge.kolmafia.session;
 
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.List;
@@ -36,7 +37,8 @@ public abstract class YouRobotManager {
   private static final Map<Integer, RobotUpgrade> indexToBottom = new HashMap<>();
   private static final Map<String, RobotUpgrade> keywordToCPU = new HashMap<>();
 
-  private static final Map<Part, Map<Integer, RobotUpgrade>> partToIndexMap = new HashMap<>();
+  private static final Map<Part, Map<Integer, RobotUpgrade>> partToIndexMap =
+      new EnumMap<>(Part.class);
 
   public static enum Part {
     TOP("top", "Top Attachment", Usable.HAT, indexToTop),
@@ -364,7 +366,7 @@ public abstract class YouRobotManager {
 
   // *** Current state of Configuration
 
-  private static final Map<Part, RobotUpgrade> currentParts = new HashMap<>();
+  private static final Map<Part, RobotUpgrade> currentParts = new EnumMap<>(Part.class);
   private static final Set<RobotUpgrade> currentCPU = EnumSet.noneOf(RobotUpgrade.class);
 
   // For testing
@@ -397,7 +399,7 @@ public abstract class YouRobotManager {
       Pattern.compile("(otherimages/robot/(left|right|top|bottom|body)(\\d+).png)\"");
 
   public static void parseAvatar(final String text) {
-    Map<Part, RobotUpgrade> parts = new HashMap<>();
+    Map<Part, RobotUpgrade> parts = new EnumMap<>(Part.class);
     List<String> images = new ArrayList<>();
     boolean changed = false;
 

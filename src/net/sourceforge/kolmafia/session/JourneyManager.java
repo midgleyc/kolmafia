@@ -2,6 +2,7 @@ package net.sourceforge.kolmafia.session;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
@@ -125,7 +126,7 @@ public abstract class JourneyManager {
         // (30 locations) -> (6 classes) -> (6 indices) -> skill
         Map<AscensionClass, String[]> slice1 = journeymanData.get(location);
         if (slice1 == null) {
-          slice1 = new HashMap<>();
+          slice1 = new EnumMap<>(AscensionClass.class);
           journeymanData.put(location, slice1);
         }
         String[] slice2 = slice1.get(aclass);
@@ -143,7 +144,7 @@ public abstract class JourneyManager {
         // (180 skills) -> (6 classes) -> (location + index)
         Map<AscensionClass, Integer> slice3 = journeymanSkills.get(skillName);
         if (slice3 == null) {
-          slice3 = new HashMap<>();
+          slice3 = new EnumMap<>(AscensionClass.class);
           journeymanSkills.put(skillName, slice3);
         }
         if (slice3.containsKey(aclass)) {

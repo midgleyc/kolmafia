@@ -1,5 +1,6 @@
 package net.sourceforge.kolmafia.request;
 
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -11,7 +12,8 @@ import net.sourceforge.kolmafia.RestrictedItemType;
 public class TrendyRequest extends GenericRequest {
   // Types: "Items", "Campground", Bookshelf", "Familiars", "Skills", "Clan Item".
 
-  private static final Map<RestrictedItemType, Map<String, Boolean>> map = new HashMap<>();
+  private static final Map<RestrictedItemType, Map<String, Boolean>> map =
+      new EnumMap<>(RestrictedItemType.class);
 
   private static final TrendyRequest INSTANCE = new TrendyRequest();
   private static boolean running = false;

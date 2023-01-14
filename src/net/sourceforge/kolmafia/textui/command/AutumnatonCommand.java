@@ -3,7 +3,7 @@ package net.sourceforge.kolmafia.textui.command;
 import static net.sourceforge.kolmafia.session.AutumnatonManager.useAutumnaton;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -154,12 +154,15 @@ public class AutumnatonCommand extends AbstractCommand {
     String response = useAutumnaton();
     var locs = AutumnatonManager.parseLocations(response);
 
-    Map<Environment, Map<DifficultyLevel, List<KoLAdventure>>> locMapping = new HashMap<>();
+    Map<Environment, Map<DifficultyLevel, List<KoLAdventure>>> locMapping =
+        new EnumMap<>(Environment.class);
 
     for (var id : locs) {
       var adv = AdventureDatabase.getAdventure(id);
       if (adv == null) continue;
-      var env = locMapping.computeIfAbsent(adv.getEnvironment(), m -> new HashMap<>());
+      var env =
+          locMapping.computeIfAbsent(
+              adv.getEnvironment(), m -> new EnumMap<>(DifficultyLevel.class));
       env.computeIfAbsent(adv.getDifficultyLevel(), m -> new ArrayList<>()).add(adv);
     }
 

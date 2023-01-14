@@ -2,6 +2,7 @@ package net.sourceforge.kolmafia;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.EnumMap;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -9,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
-import java.util.TreeMap;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import net.sourceforge.kolmafia.objectpool.ItemPool;
@@ -107,7 +107,7 @@ public class MonsterData extends AdventureResult {
   public static Map<Attribute, Object> attributeStringToMap(
       final String name, final String attributes) {
 
-    Map<Attribute, Object> attributeMap = new TreeMap<>();
+    Map<Attribute, Object> attributeMap = new EnumMap<>(Attribute.class);
 
     StringTokenizer tokens = new StringTokenizer(attributes, " ");
     while (tokens.hasMoreTokens()) {

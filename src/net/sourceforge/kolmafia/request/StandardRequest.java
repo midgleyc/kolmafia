@@ -1,7 +1,7 @@
 package net.sourceforge.kolmafia.request;
 
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -18,7 +18,8 @@ import net.sourceforge.kolmafia.session.LimitMode;
 public class StandardRequest extends GenericRequest {
   // Types: "Items", "Bookshelf Books", "Skills", "Familiars", "Clan Items".
 
-  private static final Map<RestrictedItemType, Set<String>> map = new HashMap<>();
+  private static final Map<RestrictedItemType, Set<String>> map =
+      new EnumMap<>(RestrictedItemType.class);
 
   private static boolean running = false;
 

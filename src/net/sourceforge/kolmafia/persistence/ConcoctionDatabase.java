@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
-import java.util.TreeMap;
 import java.util.stream.Collectors;
 import net.java.dev.spellcast.utilities.LockableListModel;
 import net.java.dev.spellcast.utilities.SortedListModel;
@@ -3229,7 +3228,8 @@ public class ConcoctionDatabase {
   }
 
   public static class UsableConcoctions {
-    private Map<ConcoctionType, LockableListModel<Concoction>> usableMap = new TreeMap<>();
+    private final Map<ConcoctionType, LockableListModel<Concoction>> usableMap =
+        new EnumMap<>(ConcoctionType.class);
 
     public UsableConcoctions() {
       for (ConcoctionType type : ConcoctionType.values()) {

@@ -6,6 +6,7 @@ import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
+import java.util.EnumMap;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
@@ -640,7 +641,7 @@ public abstract class BastilleBattalionManager {
 
   // *** Cached state. Resets when you visit the Bastille Battalion control rig
 
-  private static final Map<Upgrade, Style> currentStyles = new TreeMap<>();
+  private static final Map<Upgrade, Style> currentStyles = new EnumMap<>(Upgrade.class);
   private static Stats currentStats = new Stats();
   private static Castle currentCastle = null;
   private static Battle currentBattle = null;

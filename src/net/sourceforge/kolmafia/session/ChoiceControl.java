@@ -1,6 +1,7 @@
 package net.sourceforge.kolmafia.session;
 
 import java.time.format.DateTimeFormatter;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -6557,7 +6558,7 @@ public abstract class ChoiceControl {
           Pattern.DOTALL);
   private static final Pattern WLF_COUNT_PATTERN = Pattern.compile(".*? \\(([\\d]+)\\)$");
 
-  public static final Map<Quest, String> conspiracyQuestMessages = new HashMap<>();
+  public static final Map<Quest, String> conspiracyQuestMessages = new EnumMap<>(Quest.class);
 
   static {
     conspiracyQuestMessages.put(

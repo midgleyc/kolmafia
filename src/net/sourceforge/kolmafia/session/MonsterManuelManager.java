@@ -1,6 +1,7 @@
 package net.sourceforge.kolmafia.session;
 
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -268,7 +269,7 @@ public class MonsterManuelManager {
       if (!article.equals(monster.getArticle())) {
         // The "article" is a new feature in MonsterManuel. If we don't
         // have one for this monster, save it in updates
-        Map<Attribute, Object> update = new HashMap<>();
+        Map<Attribute, Object> update = new EnumMap<>(Attribute.class);
         update.put(Attribute.ARTICLE, article);
         updates.put(id, update);
 
@@ -314,7 +315,7 @@ public class MonsterManuelManager {
       final Element element,
       final String initiative,
       final String article) {
-    Map<Attribute, Object> attributeMap = new HashMap<>();
+    Map<Attribute, Object> attributeMap = new EnumMap<>(Attribute.class);
 
     if (attack.equals("?")) {
       // Attack/Defense/HP = ? means this is a scaling monster

@@ -1,5 +1,6 @@
 package net.sourceforge.kolmafia.request;
 
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -57,7 +58,7 @@ public class FamTeamRequest extends GenericRequest {
     }
   }
 
-  private static final Map<PokeBoost, Integer> boostToItemId = new HashMap<>();
+  private static final Map<PokeBoost, Integer> boostToItemId = new EnumMap<>(PokeBoost.class);
   private static final Map<Integer, PokeBoost> itemIdToBoost = new HashMap<>();
   private static final Map<String, PokeBoost> nameToBoost = new HashMap<>();
 
