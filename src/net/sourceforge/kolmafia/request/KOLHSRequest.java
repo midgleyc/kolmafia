@@ -10,9 +10,10 @@ public class KOLHSRequest extends CreateItemRequest {
   public static final boolean isKOLHSLocation(final int adventureId) {
     return switch (adventureId) {
       case AdventurePool.THE_HALLOWED_HALLS,
-          AdventurePool.SHOP_CLASS,
-          AdventurePool.CHEMISTRY_CLASS,
-          AdventurePool.ART_CLASS -> true;
+              AdventurePool.SHOP_CLASS,
+              AdventurePool.CHEMISTRY_CLASS,
+              AdventurePool.ART_CLASS ->
+          true;
       default -> false;
     };
   }

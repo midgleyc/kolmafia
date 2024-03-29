@@ -512,8 +512,8 @@ public class BatManager {
 
   public static void gainItem(final AdventureResult item) {
     switch (item.getItemId()) {
-      case ItemPool.EXPERIMENTAL_GENE_THERAPY -> BatManager.stats.increment(
-          "Maximum Bat-Health", 10);
+      case ItemPool.EXPERIMENTAL_GENE_THERAPY ->
+          BatManager.stats.increment("Maximum Bat-Health", 10);
       case ItemPool.SELF_DEFENSE_TRAINING -> BatManager.stats.increment("Bat-Armor", 1);
       case ItemPool.CONFIDENCE_BUILDING_HUG -> {
         BatManager.stats.increment("Bat-Punch Modifier", 1);

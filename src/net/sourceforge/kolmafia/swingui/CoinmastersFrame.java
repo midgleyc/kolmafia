@@ -1372,10 +1372,11 @@ public class CoinmastersFrame extends GenericFrame implements ChangeListener {
     public int buyMax(final AdventureResult item, final int max) {
       return switch (item.getItemId()) {
         case ItemPool.VIRAL_VIDEO,
-            ItemPool.PLUS_ONE,
-            ItemPool.GALLON_OF_MILK,
-            ItemPool.PRINT_SCREEN,
-            ItemPool.DAILY_DUNGEON_MALWARE -> 1;
+                ItemPool.PLUS_ONE,
+                ItemPool.GALLON_OF_MILK,
+                ItemPool.PRINT_SCREEN,
+                ItemPool.DAILY_DUNGEON_MALWARE ->
+            1;
         default -> max;
       };
     }

@@ -25,8 +25,8 @@ public class DripArmoryRequest extends CoinMasterRequest {
   private static Boolean canBuyItem(final Integer itemId) {
     AdventureResult item = ItemPool.get(itemId);
     return switch (itemId) {
-      case ItemPool.DRIPPY_SHIELD -> Preferences.getBoolean("drippyShieldUnlocked")
-          && !InventoryManager.hasItem(item);
+      case ItemPool.DRIPPY_SHIELD ->
+          Preferences.getBoolean("drippyShieldUnlocked") && !InventoryManager.hasItem(item);
       default -> item.getCount(DRIP_ARMORY.getBuyItems()) > 0;
     };
   }

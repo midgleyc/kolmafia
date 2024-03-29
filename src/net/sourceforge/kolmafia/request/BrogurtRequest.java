@@ -24,9 +24,9 @@ public class BrogurtRequest extends CoinMasterRequest {
   private static Boolean canBuyItem(final Integer itemId) {
     return switch (itemId) {
       case ItemPool.BROBERRY_BROGURT,
-          ItemPool.BROCOLATE_BROGURT,
-          ItemPool.FRENCH_BRONILLA_BROGURT -> Preferences.getString("questESlBacteria")
-          .equals("finished");
+              ItemPool.BROCOLATE_BROGURT,
+              ItemPool.FRENCH_BRONILLA_BROGURT ->
+          Preferences.getString("questESlBacteria").equals("finished");
       default -> {
         AdventureResult item = ItemPool.get(itemId, 1);
         yield item.getCount(BROGURT.getBuyItems()) > 0;

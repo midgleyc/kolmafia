@@ -108,15 +108,16 @@ public class Operator extends Command {
   public static boolean isArithmetic(final String oper) {
     return switch (oper) {
       case "+",
-          "-",
-          "*",
-          "/",
-          "%",
-          "**",
-          Parser.PRE_INCREMENT,
-          Parser.PRE_DECREMENT,
-          Parser.POST_INCREMENT,
-          Parser.POST_DECREMENT -> true;
+              "-",
+              "*",
+              "/",
+              "%",
+              "**",
+              Parser.PRE_INCREMENT,
+              Parser.PRE_DECREMENT,
+              Parser.POST_INCREMENT,
+              Parser.POST_DECREMENT ->
+          true;
       default -> false;
     };
   }

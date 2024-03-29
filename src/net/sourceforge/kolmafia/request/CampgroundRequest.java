@@ -1544,9 +1544,10 @@ public class CampgroundRequest extends GenericRequest {
       case 14 -> itemId = ItemPool.RESIDENCE_CUBE;
       case 15 -> itemId = ItemPool.GIANT_PILGRIM_HAT;
       case 16 -> itemId = ItemPool.HOUSE_SIZED_MUSHROOM;
-      default -> KoLmafia.updateDisplay(
-          MafiaState.ERROR,
-          "Unrecognized housing type (" + CampgroundRequest.currentDwellingLevel + ")!");
+      default ->
+          KoLmafia.updateDisplay(
+              MafiaState.ERROR,
+              "Unrecognized housing type (" + CampgroundRequest.currentDwellingLevel + ")!");
     }
 
     if (itemId != -1) {
@@ -1812,17 +1813,18 @@ public class CampgroundRequest extends GenericRequest {
   public static boolean isBedding(final int itemId) {
     return switch (itemId) {
       case ItemPool.BEANBAG_CHAIR,
-          ItemPool.COLD_BEDDING,
-          ItemPool.FOREST_CANOPY_BED,
-          ItemPool.GAUZE_HAMMOCK,
-          ItemPool.HOT_BEDDING,
-          ItemPool.LAZYBONES_RECLINER,
-          ItemPool.SALTWATERBED,
-          ItemPool.SLEAZE_BEDDING,
-          ItemPool.SLEEPING_STOCKING,
-          ItemPool.SPIRIT_BED,
-          ItemPool.SPOOKY_BEDDING,
-          ItemPool.STENCH_BEDDING -> true;
+              ItemPool.COLD_BEDDING,
+              ItemPool.FOREST_CANOPY_BED,
+              ItemPool.GAUZE_HAMMOCK,
+              ItemPool.HOT_BEDDING,
+              ItemPool.LAZYBONES_RECLINER,
+              ItemPool.SALTWATERBED,
+              ItemPool.SLEAZE_BEDDING,
+              ItemPool.SLEEPING_STOCKING,
+              ItemPool.SPIRIT_BED,
+              ItemPool.SPOOKY_BEDDING,
+              ItemPool.STENCH_BEDDING ->
+          true;
       default -> false;
     };
   }

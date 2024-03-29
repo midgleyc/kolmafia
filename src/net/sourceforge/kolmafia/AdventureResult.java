@@ -399,55 +399,55 @@ public class AdventureResult implements Comparable<AdventureResult>, Cloneable {
 
     return switch (this.id) {
       case ItemPool.DUSTY_BOTTLE_OF_MERLOT,
-          ItemPool.DUSTY_BOTTLE_OF_PORT,
-          ItemPool.DUSTY_BOTTLE_OF_PINOT_NOIR,
-          ItemPool.DUSTY_BOTTLE_OF_ZINFANDEL,
-          ItemPool.DUSTY_BOTTLE_OF_MARSALA,
-          ItemPool.DUSTY_BOTTLE_OF_MUSCAT -> ConsumablesDatabase.dustyBottleName(this.id);
+              ItemPool.DUSTY_BOTTLE_OF_PORT,
+              ItemPool.DUSTY_BOTTLE_OF_PINOT_NOIR,
+              ItemPool.DUSTY_BOTTLE_OF_ZINFANDEL,
+              ItemPool.DUSTY_BOTTLE_OF_MARSALA,
+              ItemPool.DUSTY_BOTTLE_OF_MUSCAT ->
+          ConsumablesDatabase.dustyBottleName(this.id);
       case ItemPool.MILKY_POTION,
-          ItemPool.SWIRLY_POTION,
-          ItemPool.BUBBLY_POTION,
-          ItemPool.SMOKY_POTION,
-          ItemPool.CLOUDY_POTION,
-          ItemPool.EFFERVESCENT_POTION,
-          ItemPool.FIZZY_POTION,
-          ItemPool.DARK_POTION,
-          ItemPool.MURKY_POTION -> AdventureResult.bangPotionName(this.id);
+              ItemPool.SWIRLY_POTION,
+              ItemPool.BUBBLY_POTION,
+              ItemPool.SMOKY_POTION,
+              ItemPool.CLOUDY_POTION,
+              ItemPool.EFFERVESCENT_POTION,
+              ItemPool.FIZZY_POTION,
+              ItemPool.DARK_POTION,
+              ItemPool.MURKY_POTION ->
+          AdventureResult.bangPotionName(this.id);
       case ItemPool.VIAL_OF_RED_SLIME,
-          ItemPool.VIAL_OF_YELLOW_SLIME,
-          ItemPool.VIAL_OF_BLUE_SLIME,
-          ItemPool.VIAL_OF_ORANGE_SLIME,
-          ItemPool.VIAL_OF_GREEN_SLIME,
-          ItemPool.VIAL_OF_VIOLET_SLIME,
-          ItemPool.VIAL_OF_VERMILION_SLIME,
-          ItemPool.VIAL_OF_AMBER_SLIME,
-          ItemPool.VIAL_OF_CHARTREUSE_SLIME,
-          ItemPool.VIAL_OF_TEAL_SLIME,
-          ItemPool.VIAL_OF_INDIGO_SLIME,
-          ItemPool.VIAL_OF_PURPLE_SLIME -> AdventureResult.slimeVialName(this.id);
+              ItemPool.VIAL_OF_YELLOW_SLIME,
+              ItemPool.VIAL_OF_BLUE_SLIME,
+              ItemPool.VIAL_OF_ORANGE_SLIME,
+              ItemPool.VIAL_OF_GREEN_SLIME,
+              ItemPool.VIAL_OF_VIOLET_SLIME,
+              ItemPool.VIAL_OF_VERMILION_SLIME,
+              ItemPool.VIAL_OF_AMBER_SLIME,
+              ItemPool.VIAL_OF_CHARTREUSE_SLIME,
+              ItemPool.VIAL_OF_TEAL_SLIME,
+              ItemPool.VIAL_OF_INDIGO_SLIME,
+              ItemPool.VIAL_OF_PURPLE_SLIME ->
+          AdventureResult.slimeVialName(this.id);
       case ItemPool.PUNCHCARD_ATTACK,
-          ItemPool.PUNCHCARD_REPAIR,
-          ItemPool.PUNCHCARD_BUFF,
-          ItemPool.PUNCHCARD_MODIFY,
-          ItemPool.PUNCHCARD_BUILD,
-          ItemPool.PUNCHCARD_TARGET,
-          ItemPool.PUNCHCARD_SELF,
-          ItemPool.PUNCHCARD_FLOOR,
-          ItemPool.PUNCHCARD_DRONE,
-          ItemPool.PUNCHCARD_WALL,
-          ItemPool.PUNCHCARD_SPHERE -> AdventureResult.punchCardName(this.id);
-      case ItemPool.UNBREAKABLE_UMBRELLA -> this.name
-          + " ("
-          + Preferences.getString("umbrellaState")
-          + ")";
+              ItemPool.PUNCHCARD_REPAIR,
+              ItemPool.PUNCHCARD_BUFF,
+              ItemPool.PUNCHCARD_MODIFY,
+              ItemPool.PUNCHCARD_BUILD,
+              ItemPool.PUNCHCARD_TARGET,
+              ItemPool.PUNCHCARD_SELF,
+              ItemPool.PUNCHCARD_FLOOR,
+              ItemPool.PUNCHCARD_DRONE,
+              ItemPool.PUNCHCARD_WALL,
+              ItemPool.PUNCHCARD_SPHERE ->
+          AdventureResult.punchCardName(this.id);
+      case ItemPool.UNBREAKABLE_UMBRELLA ->
+          this.name + " (" + Preferences.getString("umbrellaState") + ")";
       case ItemPool.JURASSIC_PARKA, ItemPool.REPLICA_JURASSIC_PARKA -> {
         var mode = Preferences.getString("parkaMode");
         yield mode.equals("") ? this.name : this.name + " (" + mode + " mode)";
       }
-      case ItemPool.BACKUP_CAMERA -> this.name
-          + " ("
-          + Preferences.getString("backupCameraMode")
-          + ")";
+      case ItemPool.BACKUP_CAMERA ->
+          this.name + " (" + Preferences.getString("backupCameraMode") + ")";
       default -> this.name;
     };
   }

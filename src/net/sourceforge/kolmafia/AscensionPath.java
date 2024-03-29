@@ -184,11 +184,12 @@ public class AscensionPath {
     public boolean canUseFamiliars() {
       return switch (this) {
         case AVATAR_OF_BORIS,
-            AVATAR_OF_JARLSBERG,
-            AVATAR_OF_SNEAKY_PETE,
-            ACTUALLY_ED_THE_UNDYING,
-            LICENSE_TO_ADVENTURE,
-            DARK_GYFFTE -> false;
+                AVATAR_OF_JARLSBERG,
+                AVATAR_OF_SNEAKY_PETE,
+                ACTUALLY_ED_THE_UNDYING,
+                LICENSE_TO_ADVENTURE,
+                DARK_GYFFTE ->
+            false;
         default -> true;
       };
     }

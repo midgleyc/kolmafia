@@ -294,22 +294,22 @@ public class UseItemRequest extends GenericRequest {
     }
     return switch (item.getItemId()) {
       case ItemPool.NEWBIESPORT_TENT,
-          ItemPool.BARSKIN_TENT,
-          ItemPool.COTTAGE,
-          ItemPool.BRICKO_PYRAMID,
-          ItemPool.HOUSE,
-          ItemPool.SANDCASTLE,
-          ItemPool.GINORMOUS_PUMPKIN,
-          ItemPool.TWIG_HOUSE,
-          ItemPool.GINGERBREAD_HOUSE,
-          ItemPool.HOBO_FORTRESS,
-          ItemPool.GIANT_FARADAY_CAGE,
-          ItemPool.SNOW_FORT,
-          ItemPool.ELEVENT,
-          ItemPool.RESIDENCE_CUBE,
-          ItemPool.GIANT_PILGRIM_HAT,
-          ItemPool.HOUSE_SIZED_MUSHROOM -> CampgroundRequest.getCurrentDwelling()
-          != CampgroundRequest.BIG_ROCK;
+              ItemPool.BARSKIN_TENT,
+              ItemPool.COTTAGE,
+              ItemPool.BRICKO_PYRAMID,
+              ItemPool.HOUSE,
+              ItemPool.SANDCASTLE,
+              ItemPool.GINORMOUS_PUMPKIN,
+              ItemPool.TWIG_HOUSE,
+              ItemPool.GINGERBREAD_HOUSE,
+              ItemPool.HOBO_FORTRESS,
+              ItemPool.GIANT_FARADAY_CAGE,
+              ItemPool.SNOW_FORT,
+              ItemPool.ELEVENT,
+              ItemPool.RESIDENCE_CUBE,
+              ItemPool.GIANT_PILGRIM_HAT,
+              ItemPool.HOUSE_SIZED_MUSHROOM ->
+          CampgroundRequest.getCurrentDwelling() != CampgroundRequest.BIG_ROCK;
       default -> false;
     };
   }
@@ -5280,12 +5280,12 @@ public class UseItemRequest extends GenericRequest {
             total = StringUtilities.parseInt(chipMatcher.group(1));
           }
           switch (itemId) {
-            case ItemPool.SOURCE_TERMINAL_PRAM_CHIP -> Preferences.setInteger(
-                "sourceTerminalPram", total);
-            case ItemPool.SOURCE_TERMINAL_GRAM_CHIP -> Preferences.setInteger(
-                "sourceTerminalGram", total);
-            case ItemPool.SOURCE_TERMINAL_SPAM_CHIP -> Preferences.setInteger(
-                "sourceTerminalSpam", total);
+            case ItemPool.SOURCE_TERMINAL_PRAM_CHIP ->
+                Preferences.setInteger("sourceTerminalPram", total);
+            case ItemPool.SOURCE_TERMINAL_GRAM_CHIP ->
+                Preferences.setInteger("sourceTerminalGram", total);
+            case ItemPool.SOURCE_TERMINAL_SPAM_CHIP ->
+                Preferences.setInteger("sourceTerminalSpam", total);
           }
           if (responseText.contains("You've already installed")) {
             return;
@@ -6849,9 +6849,10 @@ public class UseItemRequest extends GenericRequest {
     // Some only use adventures when used as a proxy for a non adventure game location
     return switch (this.itemUsed.getItemId()) {
       case ItemPool.CHATEAU_WATERCOLOR,
-          ItemPool.GOD_LOBSTER,
-          ItemPool.WITCHESS_SET,
-          ItemPool.REPLICA_WITCHESS_SET -> 0;
+              ItemPool.GOD_LOBSTER,
+              ItemPool.WITCHESS_SET,
+              ItemPool.REPLICA_WITCHESS_SET ->
+          0;
       default -> UseItemRequest.getAdventuresUsedByItem(this.itemUsed);
     };
   }

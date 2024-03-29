@@ -222,10 +222,12 @@ public class MaximizerFrame extends GenericFrame implements ListSelectionListene
       for (KoLConstants.filterType fType : KoLConstants.filterType.values()) {
         usageUnderLimit =
             switch (fType) {
-              case BOOZE -> (KoLCharacter.canDrink()
-                  && KoLCharacter.getInebriety() < KoLCharacter.getLiverCapacity());
-              case FOOD -> (KoLCharacter.canEat()
-                  && KoLCharacter.getFullness() < KoLCharacter.getStomachCapacity());
+              case BOOZE ->
+                  (KoLCharacter.canDrink()
+                      && KoLCharacter.getInebriety() < KoLCharacter.getLiverCapacity());
+              case FOOD ->
+                  (KoLCharacter.canEat()
+                      && KoLCharacter.getFullness() < KoLCharacter.getStomachCapacity());
               case SPLEEN -> (KoLCharacter.getSpleenUse() < KoLCharacter.getSpleenLimit());
               default -> true;
             };

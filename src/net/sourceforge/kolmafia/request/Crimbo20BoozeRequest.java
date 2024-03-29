@@ -26,10 +26,8 @@ public class Crimbo20BoozeRequest extends CoinMasterRequest {
   private static Boolean canBuyItem(final Integer itemId) {
     AdventureResult item = ItemPool.get(itemId);
     return switch (itemId) {
-      case ItemPool.BOOZE_DRIVE_BUTTON, ItemPool.BOOZE_MAILING_LIST -> item.getCount(
-                  KoLConstants.closet)
-              + item.getCount(KoLConstants.inventory)
-          == 0;
+      case ItemPool.BOOZE_DRIVE_BUTTON, ItemPool.BOOZE_MAILING_LIST ->
+          item.getCount(KoLConstants.closet) + item.getCount(KoLConstants.inventory) == 0;
       default -> item.getCount(CRIMBO20BOOZE.getBuyItems()) > 0;
     };
   }

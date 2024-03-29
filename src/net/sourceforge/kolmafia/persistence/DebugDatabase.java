@@ -680,27 +680,29 @@ public class DebugDatabase {
   private static boolean typesMatch(final ConsumptionType type, final ConsumptionType descType) {
     return switch (type) {
       case NONE, FOOD_HELPER, DRINK_HELPER, STICKER, FOLDER, POKEPILL ->
-      // We intentionally disallow certain items from being
-      // "used" through the GUI.
-      descType == ConsumptionType.NONE || descType == ConsumptionType.USE;
+          // We intentionally disallow certain items from being
+          // "used" through the GUI.
+          descType == ConsumptionType.NONE || descType == ConsumptionType.USE;
       case EAT,
-          DRINK,
-          SPLEEN,
-          FAMILIAR_HATCHLING,
-          FAMILIAR_EQUIPMENT,
-          ACCESSORY,
-          CONTAINER,
-          HAT,
-          PANTS,
-          SHIRT,
-          WEAPON,
-          OFFHAND -> descType == type;
-      case USE_MESSAGE_DISPLAY, USE, USE_MULTIPLE, USE_INFINITE -> descType == ConsumptionType.USE
-          || descType == ConsumptionType.USE_MULTIPLE
-          || descType == ConsumptionType.EAT
-          || descType == ConsumptionType.DRINK
-          || descType == ConsumptionType.AVATAR_POTION
-          || descType == ConsumptionType.NONE;
+              DRINK,
+              SPLEEN,
+              FAMILIAR_HATCHLING,
+              FAMILIAR_EQUIPMENT,
+              ACCESSORY,
+              CONTAINER,
+              HAT,
+              PANTS,
+              SHIRT,
+              WEAPON,
+              OFFHAND ->
+          descType == type;
+      case USE_MESSAGE_DISPLAY, USE, USE_MULTIPLE, USE_INFINITE ->
+          descType == ConsumptionType.USE
+              || descType == ConsumptionType.USE_MULTIPLE
+              || descType == ConsumptionType.EAT
+              || descType == ConsumptionType.DRINK
+              || descType == ConsumptionType.AVATAR_POTION
+              || descType == ConsumptionType.NONE;
       case POTION, AVATAR_POTION -> descType == ConsumptionType.POTION;
       case CARD, EL_VIBRATO_SPHERE, ZAP -> descType == ConsumptionType.NONE;
       default -> true;

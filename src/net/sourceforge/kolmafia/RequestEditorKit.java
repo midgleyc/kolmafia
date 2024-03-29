@@ -1152,8 +1152,8 @@ public class RequestEditorKit extends HTMLEditorKit {
       switch (group) {
         case "Normal Outfits" -> addOutfitGroup(obuffer, "outfit", "Outfits", "an", options);
         case "Custom Outfits" -> addOutfitGroup(obuffer, "outfit2", "Custom", "a custom", options);
-        case "Automatic Outfits" -> addOutfitGroup(
-            obuffer, "outfit3", "Automatic", "an automatic", options);
+        case "Automatic Outfits" ->
+            addOutfitGroup(obuffer, "outfit3", "Automatic", "an automatic", options);
       }
     }
 

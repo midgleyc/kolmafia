@@ -124,19 +124,20 @@ public class NPCStoreDatabase {
 
   public static Optional<Integer> getQuantity(int itemId) {
     return switch (itemId) {
-      case ItemPool.MIRACLE_WHIP -> Optional.of(
-          Preferences.getBoolean("_mayoDeviceRented")
-                  || Preferences.getBoolean("itemBoughtPerAscension8266")
-              ? 0
-              : 1);
-      case ItemPool.SPHYGMAYOMANOMETER, ItemPool.REFLEX_HAMMER, ItemPool.MAYO_LANCE -> Optional.of(
-          Preferences.getBoolean("_mayoDeviceRented") ? 0 : 1);
+      case ItemPool.MIRACLE_WHIP ->
+          Optional.of(
+              Preferences.getBoolean("_mayoDeviceRented")
+                      || Preferences.getBoolean("itemBoughtPerAscension8266")
+                  ? 0
+                  : 1);
+      case ItemPool.SPHYGMAYOMANOMETER, ItemPool.REFLEX_HAMMER, ItemPool.MAYO_LANCE ->
+          Optional.of(Preferences.getBoolean("_mayoDeviceRented") ? 0 : 1);
       case ItemPool.FEDORA_MOUNTED_FOUNTAIN,
-          ItemPool.PORKPIE_MOUNTED_POPPER,
-          ItemPool.SOMBRERO_MOUNTED_SPARKLER -> Optional.of(
-          Preferences.getBoolean("_fireworksShopHatBought") ? 0 : 1);
-      case ItemPool.CATHERINE_WHEEL, ItemPool.ROCKET_BOOTS, ItemPool.OVERSIZED_SPARKLER -> Optional
-          .of(Preferences.getBoolean("_fireworksShopEquipmentBought") ? 0 : 1);
+              ItemPool.PORKPIE_MOUNTED_POPPER,
+              ItemPool.SOMBRERO_MOUNTED_SPARKLER ->
+          Optional.of(Preferences.getBoolean("_fireworksShopHatBought") ? 0 : 1);
+      case ItemPool.CATHERINE_WHEEL, ItemPool.ROCKET_BOOTS, ItemPool.OVERSIZED_SPARKLER ->
+          Optional.of(Preferences.getBoolean("_fireworksShopEquipmentBought") ? 0 : 1);
       case ItemPool.BLART, ItemPool.RAINPROOF_BARREL_CAULK, ItemPool.PUMP_GREASE -> Optional.of(1);
       default -> Optional.empty();
     };
@@ -145,19 +146,20 @@ public class NPCStoreDatabase {
   private static int limitQuantity(int itemId) {
     return switch (itemId) {
       case ItemPool.ABRIDGED,
-          ItemPool.ZEPPELIN_TICKET,
-          ItemPool.FORGED_ID_DOCUMENTS,
-          ItemPool.SPARE_KIDNEY,
-          ItemPool.MIRACLE_WHIP,
-          ItemPool.SPHYGMAYOMANOMETER,
-          ItemPool.REFLEX_HAMMER,
-          ItemPool.MAYO_LANCE,
-          ItemPool.FEDORA_MOUNTED_FOUNTAIN,
-          ItemPool.PORKPIE_MOUNTED_POPPER,
-          ItemPool.SOMBRERO_MOUNTED_SPARKLER,
-          ItemPool.CATHERINE_WHEEL,
-          ItemPool.ROCKET_BOOTS,
-          ItemPool.OVERSIZED_SPARKLER -> 1;
+              ItemPool.ZEPPELIN_TICKET,
+              ItemPool.FORGED_ID_DOCUMENTS,
+              ItemPool.SPARE_KIDNEY,
+              ItemPool.MIRACLE_WHIP,
+              ItemPool.SPHYGMAYOMANOMETER,
+              ItemPool.REFLEX_HAMMER,
+              ItemPool.MAYO_LANCE,
+              ItemPool.FEDORA_MOUNTED_FOUNTAIN,
+              ItemPool.PORKPIE_MOUNTED_POPPER,
+              ItemPool.SOMBRERO_MOUNTED_SPARKLER,
+              ItemPool.CATHERINE_WHEEL,
+              ItemPool.ROCKET_BOOTS,
+              ItemPool.OVERSIZED_SPARKLER ->
+          1;
       default -> PurchaseRequest.MAX_QUANTITY;
     };
   }
@@ -214,10 +216,10 @@ public class NPCStoreDatabase {
         return switch (itemId) {
           case ItemPool.ZEPPELIN_TICKET -> !InventoryManager.hasItem(itemId);
           case ItemPool.SPARE_KIDNEY ->
-          // Should check for whether your kidney has been stolen
-          KoLCharacter.inBadMoon() && !InventoryManager.hasItem(itemId);
-          case ItemPool.FORGED_ID_DOCUMENTS -> !QuestDatabase.isQuestLaterThan(
-              Quest.MACGUFFIN, "step1");
+              // Should check for whether your kidney has been stolen
+              KoLCharacter.inBadMoon() && !InventoryManager.hasItem(itemId);
+          case ItemPool.FORGED_ID_DOCUMENTS ->
+              !QuestDatabase.isQuestLaterThan(Quest.MACGUFFIN, "step1");
           default -> true;
         };
       }
@@ -280,14 +282,11 @@ public class NPCStoreDatabase {
 
         return switch (itemId) {
           case ItemPool.FEDORA_MOUNTED_FOUNTAIN,
-              ItemPool.PORKPIE_MOUNTED_POPPER,
-              ItemPool.SOMBRERO_MOUNTED_SPARKLER -> Preferences.getBoolean(
-                  "_fireworksShopHatBought")
-              == false;
-          case ItemPool.CATHERINE_WHEEL,
-              ItemPool.ROCKET_BOOTS,
-              ItemPool.OVERSIZED_SPARKLER -> Preferences.getBoolean("_fireworksShopEquipmentBought")
-              == false;
+                  ItemPool.PORKPIE_MOUNTED_POPPER,
+                  ItemPool.SOMBRERO_MOUNTED_SPARKLER ->
+              Preferences.getBoolean("_fireworksShopHatBought") == false;
+          case ItemPool.CATHERINE_WHEEL, ItemPool.ROCKET_BOOTS, ItemPool.OVERSIZED_SPARKLER ->
+              Preferences.getBoolean("_fireworksShopEquipmentBought") == false;
           default -> true;
         };
       }
@@ -305,12 +304,12 @@ public class NPCStoreDatabase {
           case ItemPool.MARSHMALLOW -> holiday.contains("Yuletide");
           case ItemPool.OYSTER_BASKET -> holiday.contains("Oyster Egg Day");
           case ItemPool.PARTY_HAT -> holiday.contains("Festival of Jarlsberg");
-          case ItemPool.M282, ItemPool.SNAKE, ItemPool.SPARKLER -> holiday.contains(
-              "Dependence Day");
-          case ItemPool.GREEN_ROCKET -> holiday.contains("Dependence Day")
-              && holiday.contains("St. Sneaky Pete's Day");
-          case ItemPool.FOAM_NOODLE, ItemPool.INFLATABLE_DUCK, ItemPool.WATER_WINGS -> holiday
-              .contains("Generic Summer Holiday");
+          case ItemPool.M282, ItemPool.SNAKE, ItemPool.SPARKLER ->
+              holiday.contains("Dependence Day");
+          case ItemPool.GREEN_ROCKET ->
+              holiday.contains("Dependence Day") && holiday.contains("St. Sneaky Pete's Day");
+          case ItemPool.FOAM_NOODLE, ItemPool.INFLATABLE_DUCK, ItemPool.WATER_WINGS ->
+              holiday.contains("Generic Summer Holiday");
           case ItemPool.DESERT_BUS_PASS -> !KoLCharacter.desertBeachAccessible();
           case ItemPool.FOLDER_01, ItemPool.FOLDER_02, ItemPool.FOLDER_03 -> {
             AdventureResult folderHolder = ItemPool.get(ItemPool.FOLDER_HOLDER);
@@ -328,13 +327,13 @@ public class NPCStoreDatabase {
             yield false;
           }
           case ItemPool.WATER_WINGS_FOR_BABIES,
-              ItemPool.MINI_LIFE_PRESERVER,
-              ItemPool.HEAVY_DUTY_UMBRELLA,
-              ItemPool.POOL_SKIMMER -> KoLCharacter.inRaincore();
+                  ItemPool.MINI_LIFE_PRESERVER,
+                  ItemPool.HEAVY_DUTY_UMBRELLA,
+                  ItemPool.POOL_SKIMMER ->
+              KoLCharacter.inRaincore();
           case ItemPool.FISHING_LINE -> InventoryManager.hasItem(ItemPool.FISHING_POLE);
-          case ItemPool.TRICK_TOT_UNICORN, ItemPool.TRICK_TOT_CANDY -> KoLCharacter.usableFamiliar(
-                  FamiliarPool.TRICK_TOT)
-              != null;
+          case ItemPool.TRICK_TOT_UNICORN, ItemPool.TRICK_TOT_CANDY ->
+              KoLCharacter.usableFamiliar(FamiliarPool.TRICK_TOT) != null;
           default -> true;
         };
       }
@@ -496,10 +495,11 @@ public class NPCStoreDatabase {
 
         return switch (itemId) {
           case ItemPool.VALENTINE,
-              ItemPool.CHOCOLATE_COVERED_DIAMOND_STUDDED_ROSES,
-              ItemPool.BOUQUET_OF_CIRCULAR_SAW_BLADES,
-              ItemPool.BETTER_THAN_CUDDLING_CAKE,
-              ItemPool.STUFFED_NINJA_SNOWMAN -> holiday.contains("Valentine's Day");
+                  ItemPool.CHOCOLATE_COVERED_DIAMOND_STUDDED_ROSES,
+                  ItemPool.BOUQUET_OF_CIRCULAR_SAW_BLADES,
+                  ItemPool.BETTER_THAN_CUDDLING_CAKE,
+                  ItemPool.STUFFED_NINJA_SNOWMAN ->
+              holiday.contains("Valentine's Day");
           case ItemPool.POTTED_FERN, ItemPool.HAPPY_BIRTHDAY_CLAUDE_CAKE -> asc >= 1;
           case ItemPool.STUFFED_GHUOL_WHELP, ItemPool.HEART_SHAPED_BALLOON -> asc >= 2;
           case ItemPool.TULIP, ItemPool.PERSONALIZED_BIRTHDAY_CAKE -> asc >= 4;
@@ -541,9 +541,8 @@ public class NPCStoreDatabase {
           return false;
         }
         return switch (itemId) {
-          case ItemPool.TRICK_TOT_CANDY, ItemPool.TRICK_TOT_EYEBALL -> KoLCharacter.usableFamiliar(
-                  FamiliarPool.TRICK_TOT)
-              != null;
+          case ItemPool.TRICK_TOT_CANDY, ItemPool.TRICK_TOT_EYEBALL ->
+              KoLCharacter.usableFamiliar(FamiliarPool.TRICK_TOT) != null;
           default -> true;
         };
       }
@@ -553,9 +552,8 @@ public class NPCStoreDatabase {
           return false;
         }
         return switch (itemId) {
-          case ItemPool.TRICK_TOT_KNIGHT, ItemPool.TRICK_TOT_ROBOT -> KoLCharacter.usableFamiliar(
-                  FamiliarPool.TRICK_TOT)
-              != null;
+          case ItemPool.TRICK_TOT_KNIGHT, ItemPool.TRICK_TOT_ROBOT ->
+              KoLCharacter.usableFamiliar(FamiliarPool.TRICK_TOT) != null;
           default -> true;
         };
       }
@@ -565,9 +563,8 @@ public class NPCStoreDatabase {
           return false;
         }
         return switch (itemId) {
-          case ItemPool.TRICK_TOT_LIBERTY, ItemPool.TRICK_TOT_UNICORN -> KoLCharacter
-                  .usableFamiliar(FamiliarPool.TRICK_TOT)
-              != null;
+          case ItemPool.TRICK_TOT_LIBERTY, ItemPool.TRICK_TOT_UNICORN ->
+              KoLCharacter.usableFamiliar(FamiliarPool.TRICK_TOT) != null;
           default -> true;
         };
       }
@@ -579,8 +576,8 @@ public class NPCStoreDatabase {
 
         return switch (itemId) {
           case ItemPool.BLART -> !Preferences.getBoolean("itemBoughtPerAscension10790");
-          case ItemPool.RAINPROOF_BARREL_CAULK -> !Preferences.getBoolean(
-              "itemBoughtPerAscension10794");
+          case ItemPool.RAINPROOF_BARREL_CAULK ->
+              !Preferences.getBoolean("itemBoughtPerAscension10794");
           case ItemPool.PUMP_GREASE -> !Preferences.getBoolean("itemBoughtPerAscension10795");
           default -> true;
         };

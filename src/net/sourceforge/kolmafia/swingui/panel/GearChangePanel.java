@@ -893,9 +893,9 @@ public class GearChangePanel extends JPanel {
   private boolean slotItemCanBeNone(final Slot slot) {
     return switch (slot) {
       case BOOTSKIN, BOOTSPUR ->
-      // You cannot remove the item in this slot, but if
-      // nothing is equipped, need a placeholder
-      EquipmentManager.getEquipment(slot).equals(EquipmentRequest.UNEQUIP);
+          // You cannot remove the item in this slot, but if
+          // nothing is equipped, need a placeholder
+          EquipmentManager.getEquipment(slot).equals(EquipmentRequest.UNEQUIP);
       default -> true;
     };
   }

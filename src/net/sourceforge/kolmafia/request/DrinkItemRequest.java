@@ -370,14 +370,14 @@ public class DrinkItemRequest extends UseItemRequest {
   private static boolean sequentialConsume(final int itemId) {
     return switch (itemId) {
       case ItemPool.DIRTY_MARTINI,
-          ItemPool.GROGTINI,
-          ItemPool.CHERRY_BOMB,
-          ItemPool.VESPER,
-          ItemPool.BODYSLAM,
-          ItemPool.SANGRIA_DEL_DIABLO ->
-      // Allow player who owns a single tiny plastic sword to
-      // make and drink multiple drinks in succession.
-      true;
+              ItemPool.GROGTINI,
+              ItemPool.CHERRY_BOMB,
+              ItemPool.VESPER,
+              ItemPool.BODYSLAM,
+              ItemPool.SANGRIA_DEL_DIABLO ->
+          // Allow player who owns a single tiny plastic sword to
+          // make and drink multiple drinks in succession.
+          true;
       default -> false;
     };
   }
@@ -868,8 +868,8 @@ public class DrinkItemRequest extends UseItemRequest {
         Preferences.setBoolean("_missGravesVermouthDrunk", true);
       }
       case ItemPool.MAD_LIQUOR -> Preferences.setBoolean("_madLiquorDrunk", true);
-      case ItemPool.DOC_CLOCKS_THYME_COCKTAIL -> Preferences.setBoolean(
-          "_docClocksThymeCocktailDrunk", true);
+      case ItemPool.DOC_CLOCKS_THYME_COCKTAIL ->
+          Preferences.setBoolean("_docClocksThymeCocktailDrunk", true);
       case ItemPool.DRIPPY_PILSNER -> {
         Preferences.setBoolean("_drippyPilsnerUsed", true);
         Preferences.increment("drippyJuice", 5);

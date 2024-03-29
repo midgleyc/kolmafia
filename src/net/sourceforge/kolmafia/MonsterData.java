@@ -252,20 +252,21 @@ public class MonsterData extends AdventureResult {
             }
           }
           case BOSS,
-              NOBANISH,
-              NOCOPY,
-              NOMANUEL,
-              NOWISH,
-              WISH,
-              WANDERER,
-              ULTRARARE,
-              LUCKY,
-              SUPERLIKELY,
-              FREE,
-              NOWANDER,
-              GHOST,
-              SNAKE,
-              DRIPPY -> attributeMap.put(attribute, true);
+                  NOBANISH,
+                  NOCOPY,
+                  NOMANUEL,
+                  NOWISH,
+                  WISH,
+                  WANDERER,
+                  ULTRARARE,
+                  LUCKY,
+                  SUPERLIKELY,
+                  FREE,
+                  NOWANDER,
+                  GHOST,
+                  SNAKE,
+                  DRIPPY ->
+              attributeMap.put(attribute, true);
         }
       } catch (Exception e) {
         // This should not happen.  Therefore, print
@@ -1654,9 +1655,8 @@ public class MonsterData extends AdventureResult {
     var forceFree =
         switch (this.name) {
           case "X-32-F Combat Training Snowman" -> Preferences.getInteger("_snojoFreeFights") < 10;
-          case "biker", "\"plain\" girl", "jock", "party girl", "burnout" -> Preferences.getInteger(
-                  "_neverendingPartyFreeTurns")
-              < 10;
+          case "biker", "\"plain\" girl", "jock", "party girl", "burnout" ->
+              Preferences.getInteger("_neverendingPartyFreeTurns") < 10;
           default -> false;
         };
 

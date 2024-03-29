@@ -8747,55 +8747,60 @@ public abstract class ChoiceControl {
     }
     return switch (decisionText) {
       case "Ask the Question",
-          "Talk to the Ghosts",
-          "I Wanna Know What Love Is",
-          "Tap Him on the Back",
-          "Avert Your Eyes",
-          "Approach a Raider",
-          "Approach the Argument",
-          "Approach the Ghost",
-          "Approach the Accountant Ghost",
-          "Ask if He's Lost" -> 1;
+              "Talk to the Ghosts",
+              "I Wanna Know What Love Is",
+              "Tap Him on the Back",
+              "Avert Your Eyes",
+              "Approach a Raider",
+              "Approach the Argument",
+              "Approach the Ghost",
+              "Approach the Accountant Ghost",
+              "Ask if He's Lost" ->
+          1;
       case "Enter the Crypt",
-          "Try to Talk Some Sense into Them",
-          "Put Your Two Cents In",
-          "Talk to the Ghost",
-          "Tell Them What Werewolves Are",
-          "Scream in Terror",
-          "Check out the Duel",
-          "Watch the Fight",
-          "Approach and Reproach",
-          "Talk Back to the Robot" -> 2;
+              "Try to Talk Some Sense into Them",
+              "Put Your Two Cents In",
+              "Talk to the Ghost",
+              "Tell Them What Werewolves Are",
+              "Scream in Terror",
+              "Check out the Duel",
+              "Watch the Fight",
+              "Approach and Reproach",
+              "Talk Back to the Robot" ->
+          2;
       case "Go down the Steps",
-          "Make a Suggestion",
-          "Tell Them About True Love",
-          "Scold the Ghost",
-          "Examine the Pipe",
-          "Say What?",
-          "Listen to the Lesson",
-          "Listen in on the Discussion",
-          "Point out the Malefactors",
-          "Ask for Information" -> 3;
+              "Make a Suggestion",
+              "Tell Them About True Love",
+              "Scold the Ghost",
+              "Examine the Pipe",
+              "Say What?",
+              "Listen to the Lesson",
+              "Listen in on the Discussion",
+              "Point out the Malefactors",
+              "Ask for Information" ->
+          3;
       case "Hurl Some Spells of Your Own",
-          "Take Command",
-          "Lose Your Patience",
-          "Fail to Stifle a Sneeze",
-          "Ask for Help",
-          "Ask How Duskwalker Basketball Is Played, Against Your Better Judgment",
-          "Knights in White Armor, Never Reaching an End",
-          "Own up to It",
-          "Approach the Poor Waifs",
-          "Look Behind You" -> 4;
+              "Take Command",
+              "Lose Your Patience",
+              "Fail to Stifle a Sneeze",
+              "Ask for Help",
+              "Ask How Duskwalker Basketball Is Played, Against Your Better Judgment",
+              "Knights in White Armor, Never Reaching an End",
+              "Own up to It",
+              "Approach the Poor Waifs",
+              "Look Behind You" ->
+          4;
       case "Read the Book",
-          "Join the Conversation",
-          "Speak of the Pompatus of Love",
-          "Ask What's Going On",
-          "Interrupt the Rally",
-          "Ask What She's Doing Up There",
-          "Point Out an Unfortunate Fact",
-          "Try to Talk Sense",
-          "Ask for Directional Guidance",
-          "What?" -> 5;
+              "Join the Conversation",
+              "Speak of the Pompatus of Love",
+              "Ask What's Going On",
+              "Interrupt the Rally",
+              "Ask What She's Doing Up There",
+              "Point Out an Unfortunate Fact",
+              "Try to Talk Sense",
+              "Ask for Directional Guidance",
+              "What?" ->
+          5;
       default -> 0;
     };
   }

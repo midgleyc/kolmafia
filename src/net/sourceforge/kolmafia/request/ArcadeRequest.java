@@ -177,41 +177,42 @@ public class ArcadeRequest extends GenericRequest {
     // Do not look for "Encounters" inside arcade choices
     return switch (choice) {
       case
-          // Space Trip
-          460,
-          461,
-          462,
-          463,
-          464,
-          465,
-          467,
-          468,
-          469,
-          470,
-          472,
-          473,
-          474,
-          475,
-          476,
-          477,
-          478,
-          479,
-          480,
-          481,
-          482,
-          483,
-          484,
-          // DemonStar
-          471,
-          // Fighters Of Fighting
-          485,
-          // Dungeon Fist!
-          486,
-          // Meteoid
-          488,
-          489,
-          490,
-          491 -> true;
+              // Space Trip
+              460,
+              461,
+              462,
+              463,
+              464,
+              465,
+              467,
+              468,
+              469,
+              470,
+              472,
+              473,
+              474,
+              475,
+              476,
+              477,
+              478,
+              479,
+              480,
+              481,
+              482,
+              483,
+              484,
+              // DemonStar
+              471,
+              // Fighters Of Fighting
+              485,
+              // Dungeon Fist!
+              486,
+              // Meteoid
+              488,
+              489,
+              490,
+              491 ->
+          true;
       default -> false;
     };
   }

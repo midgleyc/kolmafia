@@ -107,14 +107,15 @@ public class BasementDecorator {
       boolean useful =
           switch (fam.getId()) {
             case FamiliarPool.HAND,
-                FamiliarPool.SANDWORM,
-                FamiliarPool.PARROT,
-                FamiliarPool.PRESSIE,
-                FamiliarPool.RIFTLET,
-                FamiliarPool.GIBBERER,
-                FamiliarPool.HARE -> true;
-            case FamiliarPool.SOMBRERO -> !KoLCharacter.usableFamiliars()
-                .contains(BasementRequest.SANDWORM);
+                    FamiliarPool.SANDWORM,
+                    FamiliarPool.PARROT,
+                    FamiliarPool.PRESSIE,
+                    FamiliarPool.RIFTLET,
+                    FamiliarPool.GIBBERER,
+                    FamiliarPool.HARE ->
+                true;
+            case FamiliarPool.SOMBRERO ->
+                !KoLCharacter.usableFamiliars().contains(BasementRequest.SANDWORM);
             default -> false;
           };
 

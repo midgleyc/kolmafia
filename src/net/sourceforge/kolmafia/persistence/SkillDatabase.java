@@ -116,43 +116,46 @@ public class SkillDatabase {
 
       return switch (id) {
         case SkillPool.SMILE_OF_MR_A,
-            SkillPool.SNOWCONE,
-            SkillPool.STICKER,
-            SkillPool.SUGAR,
-            SkillPool.CLIP_ART,
-            SkillPool.RAD_LIB,
-            SkillPool.SMITHSNESS,
-            SkillPool.CANDY_HEART,
-            SkillPool.PARTY_FAVOR,
-            SkillPool.LOVE_SONG,
-            SkillPool.BRICKOS,
-            SkillPool.DICE,
-            SkillPool.RESOLUTIONS,
-            SkillPool.TAFFY,
-            SkillPool.HILARIOUS,
-            SkillPool.TASTEFUL,
-            SkillPool.CARDS,
-            SkillPool.GEEKY,
-            SkillPool.CONFISCATOR -> Category.MR_SKILLS;
+                SkillPool.SNOWCONE,
+                SkillPool.STICKER,
+                SkillPool.SUGAR,
+                SkillPool.CLIP_ART,
+                SkillPool.RAD_LIB,
+                SkillPool.SMITHSNESS,
+                SkillPool.CANDY_HEART,
+                SkillPool.PARTY_FAVOR,
+                SkillPool.LOVE_SONG,
+                SkillPool.BRICKOS,
+                SkillPool.DICE,
+                SkillPool.RESOLUTIONS,
+                SkillPool.TAFFY,
+                SkillPool.HILARIOUS,
+                SkillPool.TASTEFUL,
+                SkillPool.CARDS,
+                SkillPool.GEEKY,
+                SkillPool.CONFISCATOR ->
+            Category.MR_SKILLS;
         case SkillPool.OBSERVATIOGN,
-            SkillPool.GNEFARIOUS_PICKPOCKETING,
-            SkillPool.TORSO,
-            SkillPool.GNOMISH_HARDINESS,
-            SkillPool.COSMIC_UNDERSTANDING -> Category.GNOME_SKILLS;
+                SkillPool.GNEFARIOUS_PICKPOCKETING,
+                SkillPool.TORSO,
+                SkillPool.GNOMISH_HARDINESS,
+                SkillPool.COSMIC_UNDERSTANDING ->
+            Category.GNOME_SKILLS;
         case SkillPool.LUST,
-            SkillPool.GLUTTONY,
-            SkillPool.GREED,
-            SkillPool.SLOTH,
-            SkillPool.WRATH,
-            SkillPool.ENVY,
-            SkillPool.PRIDE -> Category.BAD_MOON;
+                SkillPool.GLUTTONY,
+                SkillPool.GREED,
+                SkillPool.SLOTH,
+                SkillPool.WRATH,
+                SkillPool.ENVY,
+                SkillPool.PRIDE ->
+            Category.BAD_MOON;
         case SkillPool.MUG_FOR_THE_AUDIENCE -> Category.AVATAR_OF_SNEAKY_PETE;
         default ->
 
-        // Moxious maneuver has a 7000 id, but
-        // it's not gained by equipment.
+            // Moxious maneuver has a 7000 id, but
+            // it's not gained by equipment.
 
-        Category.VALUES[categoryId];
+            Category.VALUES[categoryId];
       };
     }
   }
@@ -698,12 +701,13 @@ public class SkillDatabase {
   public static final boolean isLibramSkill(final int skillId) {
     return switch (skillId) {
       case SkillPool.CANDY_HEART,
-          SkillPool.PARTY_FAVOR,
-          SkillPool.LOVE_SONG,
-          SkillPool.BRICKOS,
-          SkillPool.DICE,
-          SkillPool.RESOLUTIONS,
-          SkillPool.TAFFY -> true;
+              SkillPool.PARTY_FAVOR,
+              SkillPool.LOVE_SONG,
+              SkillPool.BRICKOS,
+              SkillPool.DICE,
+              SkillPool.RESOLUTIONS,
+              SkillPool.TAFFY ->
+          true;
       default -> false;
     };
   }
@@ -711,14 +715,15 @@ public class SkillDatabase {
   public static final boolean isDartSkill(final int skillId) {
     return switch (skillId) {
       case SkillPool.DART_PART1,
-          SkillPool.DART_PART2,
-          SkillPool.DART_PART3,
-          SkillPool.DART_PART4,
-          SkillPool.DART_PART5,
-          SkillPool.DART_PART6,
-          SkillPool.DART_PART7,
-          SkillPool.DART_PART8,
-          SkillPool.DART_BULLSEYE -> true;
+              SkillPool.DART_PART2,
+              SkillPool.DART_PART3,
+              SkillPool.DART_PART4,
+              SkillPool.DART_PART5,
+              SkillPool.DART_PART6,
+              SkillPool.DART_PART7,
+              SkillPool.DART_PART8,
+              SkillPool.DART_BULLSEYE ->
+          true;
       default -> false;
     };
   }
@@ -1166,13 +1171,14 @@ public class SkillDatabase {
       case SkillPool.BLOOD_CHAINS -> 5;
       case SkillPool.CHILL_OF_THE_TOMB -> 7;
       case SkillPool.BLOOD_CLOAK,
-          SkillPool.CEASELESS_SNARL,
-          SkillPool.CRUSH,
-          SkillPool.FLOCK_OF_BATS_FORM,
-          SkillPool.MIST_FORM,
-          SkillPool.SPECTRAL_AWARENESS,
-          SkillPool.WOLF_FORM,
-          SkillPool.BLOOD_BUCATINI -> 10;
+              SkillPool.CEASELESS_SNARL,
+              SkillPool.CRUSH,
+              SkillPool.FLOCK_OF_BATS_FORM,
+              SkillPool.MIST_FORM,
+              SkillPool.SPECTRAL_AWARENESS,
+              SkillPool.WOLF_FORM,
+              SkillPool.BLOOD_BUCATINI ->
+          10;
       case SkillPool.PERCEIVE_SOUL -> 15;
       case SkillPool.BALEFUL_HOWL, SkillPool.ENSORCEL -> 30;
 
@@ -1186,11 +1192,13 @@ public class SkillDatabase {
   public static final int getPPCost(final int skillId) {
     return switch (skillId) {
       case SkillPool.HAMMER_THROW_COMBAT,
-          SkillPool.JUGGLE_FIREBALLS_COMBAT,
-          SkillPool.SPIN_JUMP_COMBAT -> 1;
+              SkillPool.JUGGLE_FIREBALLS_COMBAT,
+              SkillPool.SPIN_JUMP_COMBAT ->
+          1;
       case SkillPool.ULTRA_SMASH_COMBAT,
-          SkillPool.FIREBALL_BARRAGE_COMBAT,
-          SkillPool.MULTI_BOUNCE_COMBAT -> 2;
+              SkillPool.FIREBALL_BARRAGE_COMBAT,
+              SkillPool.MULTI_BOUNCE_COMBAT ->
+          2;
       default -> 0;
     };
   }
@@ -1229,13 +1237,14 @@ public class SkillDatabase {
   public static final int getAdventureCost(final int skillId) {
     return switch (skillId) {
       case SkillPool.HIBERNATE,
-          SkillPool.SPIRIT_VACATION,
-          SkillPool.TRANSCENDENTAL_DENTE,
-          SkillPool.SIMMER,
-          SkillPool.RECRUIT_ZOMBIE,
-          SkillPool.CHECK_MIRROR,
-          SkillPool.RAIN_MAN,
-          SkillPool.EVOKE_ELDRITCH_HORROR -> 1;
+              SkillPool.SPIRIT_VACATION,
+              SkillPool.TRANSCENDENTAL_DENTE,
+              SkillPool.SIMMER,
+              SkillPool.RECRUIT_ZOMBIE,
+              SkillPool.CHECK_MIRROR,
+              SkillPool.RAIN_MAN,
+              SkillPool.EVOKE_ELDRITCH_HORROR ->
+          1;
       default -> 0;
     };
   }
@@ -1653,11 +1662,12 @@ public class SkillDatabase {
     // List all until we learn which ones are not usable
     return switch (skillId) {
       case SkillPool.EXTRACT,
-          SkillPool.DIGITIZE,
-          SkillPool.COMPRESS,
-          SkillPool.DUPLICATE,
-          SkillPool.PORTSCAN,
-          SkillPool.TURBO -> true;
+              SkillPool.DIGITIZE,
+              SkillPool.COMPRESS,
+              SkillPool.DUPLICATE,
+              SkillPool.PORTSCAN,
+              SkillPool.TURBO ->
+          true;
       default -> false;
     };
   }

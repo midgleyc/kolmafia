@@ -585,8 +585,8 @@ public abstract class UseLinkDecorator {
   private static UseLink getCreateLink(
       final int itemId, final int itemCount, final CraftingType mixingMethod) {
     return switch (mixingMethod) {
-      case COMBINE, ACOMBINE, JEWELRY -> new UseLink(
-          itemId, itemCount, "combine", "craft.php?mode=combine&a=");
+      case COMBINE, ACOMBINE, JEWELRY ->
+          new UseLink(itemId, itemCount, "combine", "craft.php?mode=combine&a=");
       case MIX, MIX_FANCY -> new UseLink(itemId, itemCount, "mix", "craft.php?mode=cocktail&a=");
       case COOK, COOK_FANCY -> new UseLink(itemId, itemCount, "cook", "craft.php?mode=cook&a=");
       default -> null;
@@ -1500,25 +1500,25 @@ public abstract class UseLinkDecorator {
 
         switch (itemId) {
           case ItemPool.LOATHING_LEGION_MANY_PURPOSE_HOOK,
-              ItemPool.LOATHING_LEGION_MOONDIAL,
-              ItemPool.LOATHING_LEGION_NECKTIE,
-              ItemPool.LOATHING_LEGION_ELECTRIC_KNIFE,
-              ItemPool.LOATHING_LEGION_CORKSCREW,
-              ItemPool.LOATHING_LEGION_CAN_OPENER,
-              ItemPool.LOATHING_LEGION_CHAINSAW,
-              ItemPool.LOATHING_LEGION_ROLLERBLADES,
-              ItemPool.LOATHING_LEGION_FLAMETHROWER,
-              ItemPool.LOATHING_LEGION_DEFIBRILLATOR,
-              ItemPool.LOATHING_LEGION_DOUBLE_PRISM,
-              ItemPool.LOATHING_LEGION_TAPE_MEASURE,
-              ItemPool.LOATHING_LEGION_KITCHEN_SINK,
-              ItemPool.LOATHING_LEGION_ABACUS,
-              ItemPool.LOATHING_LEGION_HELICOPTER,
-              ItemPool.LOATHING_LEGION_PIZZA_STONE,
-              ItemPool.LOATHING_LEGION_HAMMER -> uses.add(
-              new UseLink(itemId, 1, "switch", "inv_use.php?which=3&switch=1&whichitem="));
-          case ItemPool.INSULT_PUPPET, ItemPool.OBSERVATIONAL_GLASSES, ItemPool.COMEDY_PROP -> uses
-              .add(
+                  ItemPool.LOATHING_LEGION_MOONDIAL,
+                  ItemPool.LOATHING_LEGION_NECKTIE,
+                  ItemPool.LOATHING_LEGION_ELECTRIC_KNIFE,
+                  ItemPool.LOATHING_LEGION_CORKSCREW,
+                  ItemPool.LOATHING_LEGION_CAN_OPENER,
+                  ItemPool.LOATHING_LEGION_CHAINSAW,
+                  ItemPool.LOATHING_LEGION_ROLLERBLADES,
+                  ItemPool.LOATHING_LEGION_FLAMETHROWER,
+                  ItemPool.LOATHING_LEGION_DEFIBRILLATOR,
+                  ItemPool.LOATHING_LEGION_DOUBLE_PRISM,
+                  ItemPool.LOATHING_LEGION_TAPE_MEASURE,
+                  ItemPool.LOATHING_LEGION_KITCHEN_SINK,
+                  ItemPool.LOATHING_LEGION_ABACUS,
+                  ItemPool.LOATHING_LEGION_HELICOPTER,
+                  ItemPool.LOATHING_LEGION_PIZZA_STONE,
+                  ItemPool.LOATHING_LEGION_HAMMER ->
+              uses.add(new UseLink(itemId, 1, "switch", "inv_use.php?which=3&switch=1&whichitem="));
+          case ItemPool.INSULT_PUPPET, ItemPool.OBSERVATIONAL_GLASSES, ItemPool.COMEDY_PROP ->
+              uses.add(
                   new UseLink(
                       itemId, itemCount, "visit mourn", "pandamonium.php?action=mourn&whichitem="));
           case ItemPool.GUZZLR_TABLET -> {

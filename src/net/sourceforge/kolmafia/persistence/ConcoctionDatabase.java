@@ -452,10 +452,11 @@ public class ConcoctionDatabase {
   public static final boolean isMayo(final int id) {
     return switch (id) {
       case ItemPool.MAYONEX,
-          ItemPool.MAYODIOL,
-          ItemPool.MAYOSTAT,
-          ItemPool.MAYOZAPINE,
-          ItemPool.MAYOFLEX -> true;
+              ItemPool.MAYODIOL,
+              ItemPool.MAYOSTAT,
+              ItemPool.MAYOZAPINE,
+              ItemPool.MAYOFLEX ->
+          true;
       default -> false;
     };
   }
@@ -2532,18 +2533,22 @@ public class ConcoctionDatabase {
 
     for (int i = 0; i < ingredients.length; ++i) {
       switch (ingredients[i].getItemId()) {
-        case ItemPool.SCHLITZ, ItemPool.WILLER -> ingredients[i] =
-            ConcoctionDatabase.getBetterIngredient(
-                ItemPool.SCHLITZ, ItemPool.WILLER, availableIngredients);
-        case ItemPool.KETCHUP, ItemPool.CATSUP -> ingredients[i] =
-            ConcoctionDatabase.getBetterIngredient(
-                ItemPool.KETCHUP, ItemPool.CATSUP, availableIngredients);
-        case ItemPool.DYSPEPSI_COLA, ItemPool.CLOACA_COLA -> ingredients[i] =
-            ConcoctionDatabase.getBetterIngredient(
-                ItemPool.DYSPEPSI_COLA, ItemPool.CLOACA_COLA, availableIngredients);
-        case ItemPool.TITANIUM_UMBRELLA, ItemPool.GOATSKIN_UMBRELLA -> ingredients[i] =
-            ConcoctionDatabase.getBetterIngredient(
-                ItemPool.TITANIUM_UMBRELLA, ItemPool.GOATSKIN_UMBRELLA, availableIngredients);
+        case ItemPool.SCHLITZ, ItemPool.WILLER ->
+            ingredients[i] =
+                ConcoctionDatabase.getBetterIngredient(
+                    ItemPool.SCHLITZ, ItemPool.WILLER, availableIngredients);
+        case ItemPool.KETCHUP, ItemPool.CATSUP ->
+            ingredients[i] =
+                ConcoctionDatabase.getBetterIngredient(
+                    ItemPool.KETCHUP, ItemPool.CATSUP, availableIngredients);
+        case ItemPool.DYSPEPSI_COLA, ItemPool.CLOACA_COLA ->
+            ingredients[i] =
+                ConcoctionDatabase.getBetterIngredient(
+                    ItemPool.DYSPEPSI_COLA, ItemPool.CLOACA_COLA, availableIngredients);
+        case ItemPool.TITANIUM_UMBRELLA, ItemPool.GOATSKIN_UMBRELLA ->
+            ingredients[i] =
+                ConcoctionDatabase.getBetterIngredient(
+                    ItemPool.TITANIUM_UMBRELLA, ItemPool.GOATSKIN_UMBRELLA, availableIngredients);
       }
     }
     return ingredients;

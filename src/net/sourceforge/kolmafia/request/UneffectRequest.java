@@ -111,25 +111,26 @@ public class UneffectRequest extends GenericRequest {
 
     return switch (effectId) {
       case -1,
-          // So, what about the following?
-          EffectPool.CURSED_BY_RNG,
-          EffectPool.FORM_OF_ROACH,
-          EffectPool.SHAPE_OF_MOLE,
-          EffectPool.FORM_OF_BIRD,
-          // Known to be unremovable
-          EffectPool.MILD_MANNERED_PROFESSOR,
-          EffectPool.SAVAGE_BEAST,
-          EffectPool.GOOFBALL_WITHDRAWAL,
-          EffectPool.SOUL_CRUSHING_HEADACHE,
-          EffectPool.COATED_IN_SLIME,
-          EffectPool.EVERYTHING_LOOKS_YELLOW,
-          EffectPool.EVERYTHING_LOOKS_BLUE,
-          EffectPool.EVERYTHING_LOOKS_RED,
-          EffectPool.EVERYTHING_LOOKS_GREEN,
-          EffectPool.DEEP_TAINTED_MIND,
-          EffectPool.SPIRIT_PARIAH,
-          EffectPool.BORED_WITH_EXPLOSIONS,
-          EffectPool.FEELING_QUEASY -> false;
+              // So, what about the following?
+              EffectPool.CURSED_BY_RNG,
+              EffectPool.FORM_OF_ROACH,
+              EffectPool.SHAPE_OF_MOLE,
+              EffectPool.FORM_OF_BIRD,
+              // Known to be unremovable
+              EffectPool.MILD_MANNERED_PROFESSOR,
+              EffectPool.SAVAGE_BEAST,
+              EffectPool.GOOFBALL_WITHDRAWAL,
+              EffectPool.SOUL_CRUSHING_HEADACHE,
+              EffectPool.COATED_IN_SLIME,
+              EffectPool.EVERYTHING_LOOKS_YELLOW,
+              EffectPool.EVERYTHING_LOOKS_BLUE,
+              EffectPool.EVERYTHING_LOOKS_RED,
+              EffectPool.EVERYTHING_LOOKS_GREEN,
+              EffectPool.DEEP_TAINTED_MIND,
+              EffectPool.SPIRIT_PARIAH,
+              EffectPool.BORED_WITH_EXPLOSIONS,
+              EffectPool.FEELING_QUEASY ->
+          false;
       default -> true;
     };
   }
@@ -191,19 +192,20 @@ public class UneffectRequest extends GenericRequest {
   public static final boolean needsCocoa(final int effectId) {
     return switch (effectId) {
       case EffectPool.CURSE_OF_CLUMSINESS,
-          EffectPool.CURSE_OF_DULLNESS,
-          EffectPool.CURSE_OF_EXPOSURE,
-          EffectPool.CURSE_OF_FORGETFULNESS,
-          EffectPool.CURSE_OF_HOLLOWNESS,
-          EffectPool.CURSE_OF_IMPOTENCE,
-          EffectPool.CURSE_OF_LONELINESS,
-          EffectPool.CURSE_OF_MISFORTUNE,
-          EffectPool.CURSE_OF_SLUGGISHNESS,
-          EffectPool.CURSE_OF_VULNERABILITY,
-          EffectPool.CURSE_OF_WEAKNESS,
-          EffectPool.TOUCHED_BY_A_GHOST,
-          EffectPool.CHILLED_TO_THE_BONE,
-          EffectPool.NAUSEATED -> true;
+              EffectPool.CURSE_OF_DULLNESS,
+              EffectPool.CURSE_OF_EXPOSURE,
+              EffectPool.CURSE_OF_FORGETFULNESS,
+              EffectPool.CURSE_OF_HOLLOWNESS,
+              EffectPool.CURSE_OF_IMPOTENCE,
+              EffectPool.CURSE_OF_LONELINESS,
+              EffectPool.CURSE_OF_MISFORTUNE,
+              EffectPool.CURSE_OF_SLUGGISHNESS,
+              EffectPool.CURSE_OF_VULNERABILITY,
+              EffectPool.CURSE_OF_WEAKNESS,
+              EffectPool.TOUCHED_BY_A_GHOST,
+              EffectPool.CHILLED_TO_THE_BONE,
+              EffectPool.NAUSEATED ->
+          true;
       default -> false;
     };
   }

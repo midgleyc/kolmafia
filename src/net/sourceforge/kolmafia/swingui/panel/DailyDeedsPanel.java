@@ -149,12 +149,13 @@ public class DailyDeedsPanel extends Box implements Listener {
         case "April Shower" -> List.of(new ShowerCombo());
         case "Friars" -> List.of(new FriarsDaily());
         case "Mom" -> List.of(new MomCombo());
-        case "Skate Park" -> List.of(
-            new SkateDaily("lutz", "ice", "_skateBuff1", "Fishy"),
-            new SkateDaily("comet", "roller", "_skateBuff2", "-30% to Sea penalties"),
-            new SkateDaily("band shell", "peace", "_skateBuff3", "+sand dollars"),
-            new SkateDaily("eels", "peace", "_skateBuff4", "+10 lbs. underwater"),
-            new SkateDaily("merry-go-round", "peace", "_skateBuff5", "+25% items underwater"));
+        case "Skate Park" ->
+            List.of(
+                new SkateDaily("lutz", "ice", "_skateBuff1", "Fishy"),
+                new SkateDaily("comet", "roller", "_skateBuff2", "-30% to Sea penalties"),
+                new SkateDaily("band shell", "peace", "_skateBuff3", "+sand dollars"),
+                new SkateDaily("eels", "peace", "_skateBuff4", "+10 lbs. underwater"),
+                new SkateDaily("merry-go-round", "peace", "_skateBuff5", "+25% items underwater"));
         case "Concert" -> List.of(new ConcertDaily());
         case "Demon Summoning" -> List.of(new DemonCombo());
         case "Free Rests" -> List.of(new RestsDaily());
@@ -356,10 +357,11 @@ public class DailyDeedsPanel extends Box implements Listener {
 
     return switch (deed) {
       case "Terminal Educate",
-          "Terminal Summary",
-          "Terminal Enhance",
-          "Terminal Enquiry",
-          "Terminal Extrude" -> 13;
+              "Terminal Summary",
+              "Terminal Enhance",
+              "Terminal Enquiry",
+              "Terminal Extrude" ->
+          13;
       case "Potted Tea Tree" -> 12;
       case "Shrine to the Barrel god" -> 11;
       case "Deck of Every Card" -> 10;
@@ -3911,8 +3913,8 @@ public class DailyDeedsPanel extends Box implements Listener {
           case PASTAMANCER -> buffText = "+90% Item Drops from Monsters";
           case SAUCEROR -> buffText = "Spell Damage +150%";
           case DISCO_BANDIT -> buffText = "Ranged Damage +150%";
-          case ACCORDION_THIEF -> buffText =
-              "+45% Booze Drops from Monsters, Makes booze more effective!";
+          case ACCORDION_THIEF ->
+              buffText = "+45% Booze Drops from Monsters, Makes booze more effective!";
         }
       }
 

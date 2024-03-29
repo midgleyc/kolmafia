@@ -879,18 +879,19 @@ public class UseSkillRequest extends GenericRequest implements Comparable<UseSki
     }
 
     switch (skillId) {
-      case SkillPool.INVISIBLE_AVATAR, SkillPool.TRIPLE_SIZE -> equipForSkill(
-          skillId, UseSkillRequest.POWERFUL_GLOVE, UseSkillRequest.REPLICA_POWERFUL_GLOVE);
-      case SkillPool.MAKE_SWEATADE,
-          SkillPool.DRENCH_YOURSELF_IN_SWEAT,
-          SkillPool.SIP_SOME_SWEAT -> equipForSkill(
-          skillId,
-          UseSkillRequest.DESIGNER_SWEATPANTS,
-          UseSkillRequest.REPLICA_DESIGNER_SWEATPANTS);
+      case SkillPool.INVISIBLE_AVATAR, SkillPool.TRIPLE_SIZE ->
+          equipForSkill(
+              skillId, UseSkillRequest.POWERFUL_GLOVE, UseSkillRequest.REPLICA_POWERFUL_GLOVE);
+      case SkillPool.MAKE_SWEATADE, SkillPool.DRENCH_YOURSELF_IN_SWEAT, SkillPool.SIP_SOME_SWEAT ->
+          equipForSkill(
+              skillId,
+              UseSkillRequest.DESIGNER_SWEATPANTS,
+              UseSkillRequest.REPLICA_DESIGNER_SWEATPANTS);
       case SkillPool.CINCHO_DISPENSE_SALT_AND_LIME,
-          SkillPool.CINCHO_PARTY_SOUNDTRACK,
-          SkillPool.CINCHO_FIESTA_EXIT -> equipForSkill(
-          skillId, UseSkillRequest.CINCHO_DE_MAYO, UseSkillRequest.REPLICA_CINCHO_DE_MAYO);
+              SkillPool.CINCHO_PARTY_SOUNDTRACK,
+              SkillPool.CINCHO_FIESTA_EXIT ->
+          equipForSkill(
+              skillId, UseSkillRequest.CINCHO_DE_MAYO, UseSkillRequest.REPLICA_CINCHO_DE_MAYO);
     }
 
     if (Preferences.getBoolean("switchEquipmentForBuffs")) {
@@ -1410,17 +1411,18 @@ public class UseSkillRequest extends GenericRequest implements Comparable<UseSki
     // This might be a KoL bug.
     return switch (this.skillId) {
       case SkillPool.DARK_RITUAL,
-          SkillPool.ANCESTRAL_RECALL,
-          SkillPool.GIANT_GROWTH,
-          SkillPool.LIGHTNING_BOLT_CARD,
-          SkillPool.HEALING_SALVE,
-          SkillPool.INVISIBLE_AVATAR,
-          SkillPool.TRIPLE_SIZE,
-          SkillPool.SEEK_OUT_A_BIRD,
-          SkillPool.SWEAT_OUT_BOOZE,
-          SkillPool.CINCHO_DISPENSE_SALT_AND_LIME,
-          SkillPool.CINCHO_PARTY_SOUNDTRACK,
-          SkillPool.CINCHO_FIESTA_EXIT -> true;
+              SkillPool.ANCESTRAL_RECALL,
+              SkillPool.GIANT_GROWTH,
+              SkillPool.LIGHTNING_BOLT_CARD,
+              SkillPool.HEALING_SALVE,
+              SkillPool.INVISIBLE_AVATAR,
+              SkillPool.TRIPLE_SIZE,
+              SkillPool.SEEK_OUT_A_BIRD,
+              SkillPool.SWEAT_OUT_BOOZE,
+              SkillPool.CINCHO_DISPENSE_SALT_AND_LIME,
+              SkillPool.CINCHO_PARTY_SOUNDTRACK,
+              SkillPool.CINCHO_FIESTA_EXIT ->
+          true;
       default -> false;
     };
   }

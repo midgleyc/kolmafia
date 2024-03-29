@@ -1425,33 +1425,35 @@ public class ItemDatabase {
   public static final String getSmallImage(final int itemId) {
     return switch (itemId) {
       case ItemPool.FOLDER_01,
-          ItemPool.FOLDER_02,
-          ItemPool.FOLDER_03,
-          ItemPool.FOLDER_04,
-          ItemPool.FOLDER_05,
-          ItemPool.FOLDER_07,
-          ItemPool.FOLDER_09,
-          ItemPool.FOLDER_10,
-          ItemPool.FOLDER_12,
-          ItemPool.FOLDER_13,
-          ItemPool.FOLDER_24,
-          ItemPool.FOLDER_26 -> "folder2.gif";
+              ItemPool.FOLDER_02,
+              ItemPool.FOLDER_03,
+              ItemPool.FOLDER_04,
+              ItemPool.FOLDER_05,
+              ItemPool.FOLDER_07,
+              ItemPool.FOLDER_09,
+              ItemPool.FOLDER_10,
+              ItemPool.FOLDER_12,
+              ItemPool.FOLDER_13,
+              ItemPool.FOLDER_24,
+              ItemPool.FOLDER_26 ->
+          "folder2.gif";
       case ItemPool.FOLDER_06,
-          ItemPool.FOLDER_08,
-          ItemPool.FOLDER_11,
-          ItemPool.FOLDER_14,
-          ItemPool.FOLDER_15,
-          ItemPool.FOLDER_16,
-          ItemPool.FOLDER_17,
-          ItemPool.FOLDER_18,
-          ItemPool.FOLDER_19,
-          ItemPool.FOLDER_20,
-          ItemPool.FOLDER_21,
-          ItemPool.FOLDER_22,
-          ItemPool.FOLDER_23,
-          ItemPool.FOLDER_25,
-          ItemPool.FOLDER_27,
-          ItemPool.FOLDER_28 -> "folder1.gif";
+              ItemPool.FOLDER_08,
+              ItemPool.FOLDER_11,
+              ItemPool.FOLDER_14,
+              ItemPool.FOLDER_15,
+              ItemPool.FOLDER_16,
+              ItemPool.FOLDER_17,
+              ItemPool.FOLDER_18,
+              ItemPool.FOLDER_19,
+              ItemPool.FOLDER_20,
+              ItemPool.FOLDER_21,
+              ItemPool.FOLDER_22,
+              ItemPool.FOLDER_23,
+              ItemPool.FOLDER_25,
+              ItemPool.FOLDER_27,
+              ItemPool.FOLDER_28 ->
+          "folder1.gif";
       default -> imageById.getOrDefault(itemId, "");
     };
   }
@@ -1585,21 +1587,22 @@ public class ItemDatabase {
     // * in inventory then it cannot be moved to a Display Case.
     return switch (itemId) {
       case ItemPool.MADNESS_REEF_MAP,
-          ItemPool.MARINARA_TRENCH_MAP,
-          ItemPool.ANEMONE_MINE_MAP,
-          ItemPool.DIVE_BAR_MAP,
-          ItemPool.SKATE_PARK_MAP,
-          ItemPool.GLASS_OF_MILK,
-          ItemPool.CUP_OF_TEA,
-          ItemPool.THERMOS_OF_WHISKEY,
-          ItemPool.LUCKY_LINDY,
-          ItemPool.BEES_KNEES,
-          ItemPool.SOCKDOLLAGER,
-          ItemPool.ISH_KABIBBLE,
-          ItemPool.HOT_SOCKS,
-          ItemPool.PHONUS_BALONUS,
-          ItemPool.FLIVVER,
-          ItemPool.SLOPPY_JALOPY -> true;
+              ItemPool.MARINARA_TRENCH_MAP,
+              ItemPool.ANEMONE_MINE_MAP,
+              ItemPool.DIVE_BAR_MAP,
+              ItemPool.SKATE_PARK_MAP,
+              ItemPool.GLASS_OF_MILK,
+              ItemPool.CUP_OF_TEA,
+              ItemPool.THERMOS_OF_WHISKEY,
+              ItemPool.LUCKY_LINDY,
+              ItemPool.BEES_KNEES,
+              ItemPool.SOCKDOLLAGER,
+              ItemPool.ISH_KABIBBLE,
+              ItemPool.HOT_SOCKS,
+              ItemPool.PHONUS_BALONUS,
+              ItemPool.FLIVVER,
+              ItemPool.SLOPPY_JALOPY ->
+          true;
       default -> false;
     };
   }
@@ -1607,8 +1610,8 @@ public class ItemDatabase {
   public static final boolean haveVirtualItem(final int itemId) {
     return switch (itemId) {
       case ItemPool.MADNESS_REEF_MAP -> Preferences.getBoolean("mapToMadnessReefPurchased");
-      case ItemPool.MARINARA_TRENCH_MAP -> Preferences.getBoolean(
-          "mapToTheMarinaraTrenchPurchased");
+      case ItemPool.MARINARA_TRENCH_MAP ->
+          Preferences.getBoolean("mapToTheMarinaraTrenchPurchased");
       case ItemPool.ANEMONE_MINE_MAP -> Preferences.getBoolean("mapToAnemoneMinePurchased");
       case ItemPool.DIVE_BAR_MAP -> Preferences.getBoolean("mapToTheDiveBarPurchased");
       case ItemPool.SKATE_PARK_MAP -> Preferences.getBoolean("mapToTheSkateParkPurchased");
@@ -1825,20 +1828,22 @@ public class ItemDatabase {
 
     return switch (useType) {
       case
-          // Explicit "use"
-          USE,
-          USE_MESSAGE_DISPLAY,
-          USE_INFINITE,
-          // Multi-use
-          USE_MULTIPLE,
-          // Grow is a type of use
-          FAMILIAR_HATCHLING,
-          // Any potion
-          POTION,
-          AVATAR_POTION -> true;
-      default -> attributes.contains(Attribute.USABLE)
-          || attributes.contains(Attribute.MULTIPLE)
-          || attributes.contains(Attribute.REUSABLE);
+              // Explicit "use"
+              USE,
+              USE_MESSAGE_DISPLAY,
+              USE_INFINITE,
+              // Multi-use
+              USE_MULTIPLE,
+              // Grow is a type of use
+              FAMILIAR_HATCHLING,
+              // Any potion
+              POTION,
+              AVATAR_POTION ->
+          true;
+      default ->
+          attributes.contains(Attribute.USABLE)
+              || attributes.contains(Attribute.MULTIPLE)
+              || attributes.contains(Attribute.REUSABLE);
     };
   }
 
@@ -1934,29 +1939,30 @@ public class ItemDatabase {
     return switch (itemId) {
         // Grimacite Generation 1
       case ItemPool.GRIMACITE_GOGGLES,
-          ItemPool.GRIMACITE_GLAIVE,
-          ItemPool.GRIMACITE_GREAVES,
-          ItemPool.GRIMACITE_GARTER,
-          ItemPool.GRIMACITE_GALOSHES,
-          ItemPool.GRIMACITE_GORGET,
-          ItemPool.GRIMACITE_GUAYABERA,
-          // Grimacite Generation 2
-          ItemPool.GRIMACITE_GASMASK,
-          ItemPool.GRIMACITE_GAT,
-          ItemPool.GRIMACITE_GAITERS,
-          ItemPool.GRIMACITE_GAUNTLETS,
-          ItemPool.GRIMACITE_GO_GO_BOOTS,
-          ItemPool.GRIMACITE_GIRDLE,
-          ItemPool.GRIMACITE_GOWN,
-          // Depleted Grimacite
-          ItemPool.GRIMACITE_HAMMER,
-          ItemPool.GRIMACITE_GRAVY_BOAT,
-          ItemPool.GRIMACITE_WEIGHTLIFTING_BELT,
-          ItemPool.GRIMACITE_GRAPPLING_HOOK,
-          ItemPool.GRIMACITE_NINJA_MASK,
-          ItemPool.GRIMACITE_SHINGUARDS,
-          ItemPool.GRIMACITE_ASTROLABE,
-          ItemPool.GRIMACITE_KNEECAPPING_STICK -> true;
+              ItemPool.GRIMACITE_GLAIVE,
+              ItemPool.GRIMACITE_GREAVES,
+              ItemPool.GRIMACITE_GARTER,
+              ItemPool.GRIMACITE_GALOSHES,
+              ItemPool.GRIMACITE_GORGET,
+              ItemPool.GRIMACITE_GUAYABERA,
+              // Grimacite Generation 2
+              ItemPool.GRIMACITE_GASMASK,
+              ItemPool.GRIMACITE_GAT,
+              ItemPool.GRIMACITE_GAITERS,
+              ItemPool.GRIMACITE_GAUNTLETS,
+              ItemPool.GRIMACITE_GO_GO_BOOTS,
+              ItemPool.GRIMACITE_GIRDLE,
+              ItemPool.GRIMACITE_GOWN,
+              // Depleted Grimacite
+              ItemPool.GRIMACITE_HAMMER,
+              ItemPool.GRIMACITE_GRAVY_BOAT,
+              ItemPool.GRIMACITE_WEIGHTLIFTING_BELT,
+              ItemPool.GRIMACITE_GRAPPLING_HOOK,
+              ItemPool.GRIMACITE_NINJA_MASK,
+              ItemPool.GRIMACITE_SHINGUARDS,
+              ItemPool.GRIMACITE_ASTROLABE,
+              ItemPool.GRIMACITE_KNEECAPPING_STICK ->
+          true;
       default -> false;
     };
   }
@@ -1964,16 +1970,17 @@ public class ItemDatabase {
   public static final boolean isSealFigurine(final int itemId) {
     return switch (itemId) {
       case ItemPool.WRETCHED_SEAL,
-          ItemPool.CUTE_BABY_SEAL,
-          ItemPool.ARMORED_SEAL,
-          ItemPool.ANCIENT_SEAL,
-          ItemPool.SLEEK_SEAL,
-          ItemPool.SHADOWY_SEAL,
-          ItemPool.STINKING_SEAL,
-          ItemPool.CHARRED_SEAL,
-          ItemPool.COLD_SEAL,
-          ItemPool.SLIPPERY_SEAL,
-          ItemPool.DEPLETED_URANIUM_SEAL -> true;
+              ItemPool.CUTE_BABY_SEAL,
+              ItemPool.ARMORED_SEAL,
+              ItemPool.ANCIENT_SEAL,
+              ItemPool.SLEEK_SEAL,
+              ItemPool.SHADOWY_SEAL,
+              ItemPool.STINKING_SEAL,
+              ItemPool.CHARRED_SEAL,
+              ItemPool.COLD_SEAL,
+              ItemPool.SLIPPERY_SEAL,
+              ItemPool.DEPLETED_URANIUM_SEAL ->
+          true;
       default -> false;
     };
   }
@@ -1981,16 +1988,17 @@ public class ItemDatabase {
   public static final boolean isBRICKOMonster(final int itemId) {
     return switch (itemId) {
       case ItemPool.BRICKO_OOZE,
-          ItemPool.BRICKO_BAT,
-          ItemPool.BRICKO_OYSTER,
-          ItemPool.BRICKO_TURTLE,
-          ItemPool.BRICKO_ELEPHANT,
-          ItemPool.BRICKO_OCTOPUS,
-          ItemPool.BRICKO_PYTHON,
-          ItemPool.BRICKO_VACUUM_CLEANER,
-          ItemPool.BRICKO_AIRSHIP,
-          ItemPool.BRICKO_CATHEDRAL,
-          ItemPool.BRICKO_CHICKEN -> true;
+              ItemPool.BRICKO_BAT,
+              ItemPool.BRICKO_OYSTER,
+              ItemPool.BRICKO_TURTLE,
+              ItemPool.BRICKO_ELEPHANT,
+              ItemPool.BRICKO_OCTOPUS,
+              ItemPool.BRICKO_PYTHON,
+              ItemPool.BRICKO_VACUUM_CLEANER,
+              ItemPool.BRICKO_AIRSHIP,
+              ItemPool.BRICKO_CATHEDRAL,
+              ItemPool.BRICKO_CHICKEN ->
+          true;
       default -> false;
     };
   }
@@ -1998,10 +2006,11 @@ public class ItemDatabase {
   public static final boolean isStinkyCheeseItem(final int itemId) {
     return switch (itemId) {
       case ItemPool.STINKY_CHEESE_SWORD,
-          ItemPool.STINKY_CHEESE_DIAPER,
-          ItemPool.STINKY_CHEESE_WHEEL,
-          ItemPool.STINKY_CHEESE_EYE,
-          ItemPool.STINKY_CHEESE_STAFF -> true;
+              ItemPool.STINKY_CHEESE_DIAPER,
+              ItemPool.STINKY_CHEESE_WHEEL,
+              ItemPool.STINKY_CHEESE_EYE,
+              ItemPool.STINKY_CHEESE_STAFF ->
+          true;
       default -> false;
     };
   }
@@ -2374,23 +2383,24 @@ public class ItemDatabase {
   public static boolean unusableInBeecore(final int itemId) {
     return switch (itemId) {
       case
-          // These "B" items ARE usable in Beecore.
-          ItemPool.BALL_POLISH,
-          ItemPool.FRATHOUSE_BLUEPRINTS,
-          ItemPool.COBBS_KNOB_MAP,
-          ItemPool.BINDER_CLIP,
-          // And so are these IOTM foldables
-          ItemPool.ICE_BABY,
-          ItemPool.JUGGLERS_BALLS,
-          ItemPool.EYEBALL_PENDANT,
-          ItemPool.SPOOKY_PUTTY_BALL,
-          ItemPool.LOATHING_LEGION_ABACUS,
-          ItemPool.LOATHING_LEGION_DEFIBRILLATOR,
-          ItemPool.LOATHING_LEGION_DOUBLE_PRISM,
-          ItemPool.LOATHING_LEGION_ROLLERBLADES,
-          // "using" this is really planting
+              // These "B" items ARE usable in Beecore.
+              ItemPool.BALL_POLISH,
+              ItemPool.FRATHOUSE_BLUEPRINTS,
+              ItemPool.COBBS_KNOB_MAP,
+              ItemPool.BINDER_CLIP,
+              // And so are these IOTM foldables
+              ItemPool.ICE_BABY,
+              ItemPool.JUGGLERS_BALLS,
+              ItemPool.EYEBALL_PENDANT,
+              ItemPool.SPOOKY_PUTTY_BALL,
+              ItemPool.LOATHING_LEGION_ABACUS,
+              ItemPool.LOATHING_LEGION_DEFIBRILLATOR,
+              ItemPool.LOATHING_LEGION_DOUBLE_PRISM,
+              ItemPool.LOATHING_LEGION_ROLLERBLADES,
+              // "using" this is really planting
 
-          ItemPool.ENCHANTED_BEAN -> false;
+              ItemPool.ENCHANTED_BEAN ->
+          false;
       default -> KoLCharacter.hasBeeosity(ItemDatabase.getItemName(itemId));
     };
   }

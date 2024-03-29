@@ -2186,8 +2186,8 @@ public class FightRequest extends GenericRequest {
             Preferences.setInteger("_lastDailyDungeonRoom", round - 1);
           }
         }
-        case AdventurePool.WARBEAR_FORTRESS_LEVEL_THREE -> ResultProcessor.processItem(
-            ItemPool.WARBEAR_BADGE, -1);
+        case AdventurePool.WARBEAR_FORTRESS_LEVEL_THREE ->
+            ResultProcessor.processItem(ItemPool.WARBEAR_BADGE, -1);
         case AdventurePool.SHADOW_RIFT -> {
           Preferences.increment("_shadowRiftCombats");
           MonsterStatusTracker.recalculateOriginalStats();
@@ -3008,8 +3008,9 @@ public class FightRequest extends GenericRequest {
 
     switch (KoLAdventure.lastAdventureId()) {
       case AdventurePool.FRAT_UNIFORM_BATTLEFIELD,
-          AdventurePool.HIPPY_UNIFORM_BATTLEFIELD,
-          AdventurePool.EXPLOADED_BATTLEFIELD -> IslandManager.handleBattlefield(responseText);
+              AdventurePool.HIPPY_UNIFORM_BATTLEFIELD,
+              AdventurePool.EXPLOADED_BATTLEFIELD ->
+          IslandManager.handleBattlefield(responseText);
       case AdventurePool.HOBOPOLIS_TOWN_SQUARE -> HobopolisDecorator.handleTownSquare(responseText);
     }
 

@@ -841,10 +841,10 @@ public class CreateItemRequest extends GenericRequest implements Comparable<Crea
 
     boolean autoRepairSuccessful =
         switch (mixingMethod) {
-          case COOK_FANCY -> CreateItemRequest.useBoxServant(
-              ItemPool.CHEF, ItemPool.CLOCKWORK_CHEF);
-          case MIX_FANCY -> CreateItemRequest.useBoxServant(
-              ItemPool.BARTENDER, ItemPool.CLOCKWORK_BARTENDER);
+          case COOK_FANCY ->
+              CreateItemRequest.useBoxServant(ItemPool.CHEF, ItemPool.CLOCKWORK_CHEF);
+          case MIX_FANCY ->
+              CreateItemRequest.useBoxServant(ItemPool.BARTENDER, ItemPool.CLOCKWORK_BARTENDER);
           default -> false;
 
             // If they want to auto-repair, make sure that the appropriate
@@ -1124,16 +1124,18 @@ public class CreateItemRequest extends GenericRequest implements Comparable<Crea
 
   private static int getAdventuresUsed(final CraftingType mixingMethod, final int quantityNeeded) {
     return switch (mixingMethod) {
-      case SMITH, SSMITH -> Math.max(
-          0,
-          (quantityNeeded
-              - ConcoctionDatabase.getFreeCraftingTurns()
-              - ConcoctionDatabase.getFreeSmithingTurns()));
-      case COOK_FANCY -> Math.max(
-          0,
-          (quantityNeeded
-              - ConcoctionDatabase.getFreeCraftingTurns()
-              - ConcoctionDatabase.getFreeCookingTurns()));
+      case SMITH, SSMITH ->
+          Math.max(
+              0,
+              (quantityNeeded
+                  - ConcoctionDatabase.getFreeCraftingTurns()
+                  - ConcoctionDatabase.getFreeSmithingTurns()));
+      case COOK_FANCY ->
+          Math.max(
+              0,
+              (quantityNeeded
+                  - ConcoctionDatabase.getFreeCraftingTurns()
+                  - ConcoctionDatabase.getFreeCookingTurns()));
       case MIX_FANCY -> Math.max(0, (quantityNeeded - ConcoctionDatabase.getFreeCraftingTurns()));
       default -> 0;
     };

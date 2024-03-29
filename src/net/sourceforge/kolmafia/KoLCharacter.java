@@ -2353,15 +2353,15 @@ public abstract class KoLCharacter {
     return switch (element) {
       case COLD -> (int) KoLCharacter.currentModifiers.getDouble(DoubleModifier.COLD_RESISTANCE);
       case HOT -> (int) KoLCharacter.currentModifiers.getDouble(DoubleModifier.HOT_RESISTANCE);
-      case SLEAZE -> (int)
-          KoLCharacter.currentModifiers.getDouble(DoubleModifier.SLEAZE_RESISTANCE);
-      case SPOOKY -> (int)
-          KoLCharacter.currentModifiers.getDouble(DoubleModifier.SPOOKY_RESISTANCE);
-      case STENCH -> (int)
-          KoLCharacter.currentModifiers.getDouble(DoubleModifier.STENCH_RESISTANCE);
+      case SLEAZE ->
+          (int) KoLCharacter.currentModifiers.getDouble(DoubleModifier.SLEAZE_RESISTANCE);
+      case SPOOKY ->
+          (int) KoLCharacter.currentModifiers.getDouble(DoubleModifier.SPOOKY_RESISTANCE);
+      case STENCH ->
+          (int) KoLCharacter.currentModifiers.getDouble(DoubleModifier.STENCH_RESISTANCE);
       case SLIME -> (int) KoLCharacter.currentModifiers.getDouble(DoubleModifier.SLIME_RESISTANCE);
-      case SUPERCOLD -> (int)
-          KoLCharacter.currentModifiers.getDouble(DoubleModifier.SUPERCOLD_RESISTANCE);
+      case SUPERCOLD ->
+          (int) KoLCharacter.currentModifiers.getDouble(DoubleModifier.SUPERCOLD_RESISTANCE);
       default -> 0;
     };
   }
@@ -4776,10 +4776,10 @@ public abstract class KoLCharacter {
   public static boolean hasEquipped(
       Map<Slot, AdventureResult> equipment, final AdventureResult item) {
     return switch (ItemDatabase.getConsumptionType(item.getItemId())) {
-      case WEAPON -> KoLCharacter.hasEquipped(
-          equipment, item, EnumSet.of(Slot.WEAPON, Slot.OFFHAND));
-      case OFFHAND -> KoLCharacter.hasEquipped(
-          equipment, item, EnumSet.of(Slot.OFFHAND, Slot.FAMILIAR));
+      case WEAPON ->
+          KoLCharacter.hasEquipped(equipment, item, EnumSet.of(Slot.WEAPON, Slot.OFFHAND));
+      case OFFHAND ->
+          KoLCharacter.hasEquipped(equipment, item, EnumSet.of(Slot.OFFHAND, Slot.FAMILIAR));
       case HAT -> KoLCharacter.hasEquipped(equipment, item, Slot.HAT);
       case SHIRT -> KoLCharacter.hasEquipped(equipment, item, Slot.SHIRT);
       case PANTS -> KoLCharacter.hasEquipped(equipment, item, Slot.PANTS);
@@ -5099,10 +5099,10 @@ public abstract class KoLCharacter {
     // Add in strung-up quartet.
     if (KoLCharacter.getAscensions() == Preferences.getInteger("lastQuartetAscension")) {
       switch (Preferences.getInteger("lastQuartetRequest")) {
-        case 1 -> newModifiers.addDouble(
-            DoubleModifier.MONSTER_LEVEL, 5, ModifierType.BALLROOM, "ML");
-        case 2 -> newModifiers.addDouble(
-            DoubleModifier.COMBAT_RATE, -5, ModifierType.BALLROOM, "Combat");
+        case 1 ->
+            newModifiers.addDouble(DoubleModifier.MONSTER_LEVEL, 5, ModifierType.BALLROOM, "ML");
+        case 2 ->
+            newModifiers.addDouble(DoubleModifier.COMBAT_RATE, -5, ModifierType.BALLROOM, "Combat");
         case 3 -> newModifiers.addDouble(DoubleModifier.ITEMDROP, 5, ModifierType.BALLROOM, "Item");
       }
     }
@@ -5491,12 +5491,12 @@ public abstract class KoLCharacter {
         && (!KoLCharacter.inGLover() || KoLCharacter.hasGs(item.getName()))) {
       switch (itemId) {
         case ItemPool.STICKER_SWORD, ItemPool.STICKER_CROSSBOW ->
-        // Apply stickers
-        SlotSet.STICKER_SLOTS.stream()
-            .map(equipment::get)
-            .filter(s -> s != null && s != EquipmentRequest.UNEQUIP)
-            .map(AdventureResult::getItemId)
-            .forEach((id) -> newModifiers.add(ModifierDatabase.getItemModifiers(id)));
+            // Apply stickers
+            SlotSet.STICKER_SLOTS.stream()
+                .map(equipment::get)
+                .filter(s -> s != null && s != EquipmentRequest.UNEQUIP)
+                .map(AdventureResult::getItemId)
+                .forEach((id) -> newModifiers.add(ModifierDatabase.getItemModifiers(id)));
         case ItemPool.CARD_SLEEVE -> {
           // Apply card
           AdventureResult card = equipment.get(Slot.CARDSLEEVE);
@@ -5505,12 +5505,12 @@ public abstract class KoLCharacter {
           }
         }
         case ItemPool.FOLDER_HOLDER, ItemPool.REPLICA_FOLDER_HOLDER ->
-        // Apply folders
-        SlotSet.FOLDER_SLOTS.stream()
-            .map(equipment::get)
-            .filter(f -> f != null && f != EquipmentRequest.UNEQUIP)
-            .map(AdventureResult::getItemId)
-            .forEach((id) -> newModifiers.add(ModifierDatabase.getItemModifiers(id)));
+            // Apply folders
+            SlotSet.FOLDER_SLOTS.stream()
+                .map(equipment::get)
+                .filter(f -> f != null && f != EquipmentRequest.UNEQUIP)
+                .map(AdventureResult::getItemId)
+                .forEach((id) -> newModifiers.add(ModifierDatabase.getItemModifiers(id)));
         case ItemPool.COWBOY_BOOTS -> {
           AdventureResult skin = equipment.get(Slot.BOOTSKIN);
           AdventureResult spur = equipment.get(Slot.BOOTSPUR);
@@ -5522,11 +5522,12 @@ public abstract class KoLCharacter {
           }
         }
         case ItemPool.HATSEAT ->
-        // Apply enthroned familiar
-        newModifiers.add(ModifierDatabase.getModifiers(ModifierType.THRONE, enthroned.getRace()));
+            // Apply enthroned familiar
+            newModifiers.add(
+                ModifierDatabase.getModifiers(ModifierType.THRONE, enthroned.getRace()));
         case ItemPool.BUDDY_BJORN ->
-        // Apply bjorned familiar
-        newModifiers.add(ModifierDatabase.getModifiers(ModifierType.BJORN, bjorned.getRace()));
+            // Apply bjorned familiar
+            newModifiers.add(ModifierDatabase.getModifiers(ModifierType.BJORN, bjorned.getRace()));
         case ItemPool.VAMPYRIC_CLOAKE -> newModifiers.applyVampyricCloakeModifiers();
         default -> {
           var modeable = Modeable.find(itemId);

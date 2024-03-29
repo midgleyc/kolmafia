@@ -417,22 +417,21 @@ public class ResponseTextParser {
 
             switch (itemId) {
               case ItemPool.YEARBOOK_CAMERA -> ItemDatabase.parseYearbookCamera(responseText);
-              case ItemPool.KNOCK_OFF_RETRO_SUPERHERO_CAPE -> ItemDatabase.parseRetroCape(
-                  responseText);
+              case ItemPool.KNOCK_OFF_RETRO_SUPERHERO_CAPE ->
+                  ItemDatabase.parseRetroCape(responseText);
               case ItemPool.HATSEAT -> ItemDatabase.parseCrownOfThrones(responseText);
               case ItemPool.BUDDY_BJORN -> ItemDatabase.parseBuddyBjorn(responseText);
-              case ItemPool.FOURTH_SABER, ItemPool.REPLICA_FOURTH_SABER -> ItemDatabase.parseSaber(
-                  responseText);
-              case ItemPool.VAMPIRE_VINTNER_WINE -> ItemDatabase.parseVampireVintnerWine(
-                  responseText);
+              case ItemPool.FOURTH_SABER, ItemPool.REPLICA_FOURTH_SABER ->
+                  ItemDatabase.parseSaber(responseText);
+              case ItemPool.VAMPIRE_VINTNER_WINE ->
+                  ItemDatabase.parseVampireVintnerWine(responseText);
               case ItemPool.COMBAT_LOVERS_LOCKET -> LocketManager.parseLocket(responseText);
               case ItemPool.UNBREAKABLE_UMBRELLA -> ItemDatabase.parseUmbrella(responseText);
               case ItemPool.JUNE_CLEAVER -> ItemDatabase.parseCleaver(responseText);
-              case ItemPool.DESIGNER_SWEATPANTS,
-                  ItemPool.REPLICA_DESIGNER_SWEATPANTS -> ItemDatabase.parseDesignerSweatpants(
-                  responseText);
-              case ItemPool.POWERFUL_GLOVE, ItemPool.REPLICA_POWERFUL_GLOVE -> ItemDatabase
-                  .parsePowerfulGlove(responseText);
+              case ItemPool.DESIGNER_SWEATPANTS, ItemPool.REPLICA_DESIGNER_SWEATPANTS ->
+                  ItemDatabase.parseDesignerSweatpants(responseText);
+              case ItemPool.POWERFUL_GLOVE, ItemPool.REPLICA_POWERFUL_GLOVE ->
+                  ItemDatabase.parsePowerfulGlove(responseText);
               case ItemPool.RING -> ItemDatabase.parseRing(responseText);
               case ItemPool.LATTE_MUG -> LatteRequest.parseDescription(responseText);
               case ItemPool.EVERFULL_DART_HOLSTER -> ItemDatabase.parseDartPerks(responseText);
@@ -453,13 +452,13 @@ public class ResponseTextParser {
           int effectId = EffectDatabase.getEffectIdFromDescription(descid);
           switch (effectId) {
             case EffectPool.WINE_FORTIFIED,
-                EffectPool.WINE_HOT,
-                EffectPool.WINE_FRISKY,
-                EffectPool.WINE_COLD,
-                EffectPool.WINE_DARK,
-                EffectPool.WINE_BEFOULED,
-                EffectPool.WINE_FRIENDLY -> EffectDatabase.parseVampireVintnerWineEffect(
-                responseText, effectId);
+                    EffectPool.WINE_HOT,
+                    EffectPool.WINE_FRISKY,
+                    EffectPool.WINE_COLD,
+                    EffectPool.WINE_DARK,
+                    EffectPool.WINE_BEFOULED,
+                    EffectPool.WINE_FRIENDLY ->
+                EffectDatabase.parseVampireVintnerWineEffect(responseText, effectId);
           }
         }
       }
@@ -935,13 +934,14 @@ public class ResponseTextParser {
         // We don't want to avoid incrementing the pref if they are increased before that maximum
         // is reflected in KoLmafia data
       case SkillPool.TOGGLE_OPTIMALITY,
-          SkillPool.PIRATE_BELLOW,
-          SkillPool.HOLIDAY_FUN,
-          SkillPool.SUMMON_CARROT,
-          SkillPool.BEAR_ESSENCE,
-          SkillPool.CALCULATE_THE_UNIVERSE,
-          SkillPool.EXPERIENCE_SAFARI,
-          SkillPool.SUMMON_KOKOMO_RESORT_PASS -> Preferences.increment(levelPref);
+              SkillPool.PIRATE_BELLOW,
+              SkillPool.HOLIDAY_FUN,
+              SkillPool.SUMMON_CARROT,
+              SkillPool.BEAR_ESSENCE,
+              SkillPool.CALCULATE_THE_UNIVERSE,
+              SkillPool.EXPERIENCE_SAFARI,
+              SkillPool.SUMMON_KOKOMO_RESORT_PASS ->
+          Preferences.increment(levelPref);
       default -> {
         var maxLevel = SkillDatabase.getMaxLevel(skillId);
         if (maxLevel > 0) {
@@ -954,29 +954,32 @@ public class ResponseTextParser {
       int cost =
           switch (skillId) {
             case SkillPool.BOILING_TEAR_DUCTS,
-                SkillPool.PROJECTILE_SALIVARY_GLANDS,
-                SkillPool.TRANSLUCENT_SKIN,
-                SkillPool.SKUNK_GLANDS,
-                SkillPool.THROAT_REFRIDGERANT,
-                SkillPool.INTERNAL_SODA_MACHINE -> 30;
+                    SkillPool.PROJECTILE_SALIVARY_GLANDS,
+                    SkillPool.TRANSLUCENT_SKIN,
+                    SkillPool.SKUNK_GLANDS,
+                    SkillPool.THROAT_REFRIDGERANT,
+                    SkillPool.INTERNAL_SODA_MACHINE ->
+                30;
             case SkillPool.STEROID_BLADDER,
-                SkillPool.MAGIC_SWEAT,
-                SkillPool.FLAPPY_EARS,
-                SkillPool.SELF_COMBING_HAIR,
-                SkillPool.INTRACRANIAL_EYE,
-                SkillPool.MIND_BULLETS,
-                SkillPool.EXTRA_KIDNEY,
-                SkillPool.EXTRA_GALL_BLADDER -> 60;
+                    SkillPool.MAGIC_SWEAT,
+                    SkillPool.FLAPPY_EARS,
+                    SkillPool.SELF_COMBING_HAIR,
+                    SkillPool.INTRACRANIAL_EYE,
+                    SkillPool.MIND_BULLETS,
+                    SkillPool.EXTRA_KIDNEY,
+                    SkillPool.EXTRA_GALL_BLADDER ->
+                60;
             case SkillPool.EXTRA_MUSCLES,
-                SkillPool.ADIPOSE_POLYMERS,
-                SkillPool.METALLIC_SKIN,
-                SkillPool.HYPNO_EYES,
-                SkillPool.EXTRA_BRAIN,
-                SkillPool.MAGNETIC_EARS,
-                SkillPool.EXTREMELY_PUNCHABLE_FACE,
-                SkillPool.FIREFLY_ABDOMEN,
-                SkillPool.BONE_SPRINGS,
-                SkillPool.SQUID_GLANDS -> 90;
+                    SkillPool.ADIPOSE_POLYMERS,
+                    SkillPool.METALLIC_SKIN,
+                    SkillPool.HYPNO_EYES,
+                    SkillPool.EXTRA_BRAIN,
+                    SkillPool.MAGNETIC_EARS,
+                    SkillPool.EXTREMELY_PUNCHABLE_FACE,
+                    SkillPool.FIREFLY_ABDOMEN,
+                    SkillPool.BONE_SPRINGS,
+                    SkillPool.SQUID_GLANDS ->
+                90;
             case SkillPool.SUCKER_FINGERS, SkillPool.BACKWARDS_KNEES -> 120;
             default -> 0;
           };

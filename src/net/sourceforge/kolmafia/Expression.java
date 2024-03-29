@@ -254,29 +254,36 @@ public class Expression {
           AdventureResult item = ItemPool.get(itemId);
           v = KoLCharacter.hasEquipped(item) ? 1 : 0;
         }
-        case 'h' -> v =
-            Modifiers.mainhandClass.equalsIgnoreCase((String) this.literals.get((int) s[--sp]))
-                ? 1
-                : 0;
-        case 'i' -> v =
-            FamiliarDatabase.hasAttribute(
-                    Modifiers.currentFamiliar, (String) this.literals.get((int) s[--sp]))
-                ? 1
-                : 0;
-        case 'j' -> v =
-            Modifiers.currentEnvironment.equalsIgnoreCase((String) this.literals.get((int) s[--sp]))
-                ? 1
-                : 0;
-        case 'k' -> v =
-            KoLCharacter.mainStat()
-                    .name()
-                    .equalsIgnoreCase((String) this.literals.get((int) s[--sp]))
-                ? 1
-                : 0;
-        case 'l' -> v =
-            Modifiers.currentLocation.equalsIgnoreCase((String) this.literals.get((int) s[--sp]))
-                ? 1
-                : 0;
+        case 'h' ->
+            v =
+                Modifiers.mainhandClass.equalsIgnoreCase((String) this.literals.get((int) s[--sp]))
+                    ? 1
+                    : 0;
+        case 'i' ->
+            v =
+                FamiliarDatabase.hasAttribute(
+                        Modifiers.currentFamiliar, (String) this.literals.get((int) s[--sp]))
+                    ? 1
+                    : 0;
+        case 'j' ->
+            v =
+                Modifiers.currentEnvironment.equalsIgnoreCase(
+                        (String) this.literals.get((int) s[--sp]))
+                    ? 1
+                    : 0;
+        case 'k' ->
+            v =
+                KoLCharacter.mainStat()
+                        .name()
+                        .equalsIgnoreCase((String) this.literals.get((int) s[--sp]))
+                    ? 1
+                    : 0;
+        case 'l' ->
+            v =
+                Modifiers.currentLocation.equalsIgnoreCase(
+                        (String) this.literals.get((int) s[--sp]))
+                    ? 1
+                    : 0;
         case 'n' -> {
           var input = (String) this.literals.get((int) s[--sp]);
           if (input.equalsIgnoreCase("awol")) {
@@ -414,10 +421,11 @@ public class Expression {
         case 'P' -> v = KoLCharacter.currentPastaThrall.getLevel();
         case 'R' -> v = KoLCharacter.getReagentPotionDuration();
         case 'S' -> v = KoLCharacter.getSpleenUse();
-        case 'T' -> v =
-            this.effect == null
-                ? 0.0
-                : Math.max(1, this.effect.getCount(KoLConstants.activeEffects));
+        case 'T' ->
+            v =
+                this.effect == null
+                    ? 0.0
+                    : Math.max(1, this.effect.getCount(KoLConstants.activeEffects));
         case 'U' -> v = KoLCharacter.getTelescopeUpgrades();
         case 'W' -> v = Modifiers.currentWeight;
         case 'X' -> v = KoLCharacter.getGender().modifierValue;

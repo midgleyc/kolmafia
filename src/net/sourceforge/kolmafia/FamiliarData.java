@@ -458,10 +458,10 @@ public class FamiliarData implements Comparable<FamiliarData> {
     int weight =
         switch (this.getEffectiveId()) {
             // Homemade Robot ignores experience entirely
-          case FamiliarPool.HOMEMADE_ROBOT -> 1
-              + Math.min(Preferences.getInteger("homemadeRobotUpgrades") * 11, 99);
-          default -> Math.max(
-              Math.min(this.getMaxBaseWeight(), (int) Math.sqrt(this.experience)), 1);
+          case FamiliarPool.HOMEMADE_ROBOT ->
+              1 + Math.min(Preferences.getInteger("homemadeRobotUpgrades") * 11, 99);
+          default ->
+              Math.max(Math.min(this.getMaxBaseWeight(), (int) Math.sqrt(this.experience)), 1);
         };
 
     this.setWeight(weight);
@@ -805,8 +805,8 @@ public class FamiliarData implements Comparable<FamiliarData> {
           EquipmentManager.updateEquipmentList(Slot.FAMILIAR);
         }
         default ->
-        // Everything else
-        EquipmentManager.updateEquipmentList(Slot.FAMILIAR);
+            // Everything else
+            EquipmentManager.updateEquipmentList(Slot.FAMILIAR);
       }
       EquipmentManager.lockFamiliarItem();
     }
@@ -1000,17 +1000,18 @@ public class FamiliarData implements Comparable<FamiliarData> {
   public boolean canCarry() {
     return switch (this.id) {
       case FamiliarPool.DOPPEL,
-          FamiliarPool.CHAMELEON,
-          FamiliarPool.HATRACK,
-          FamiliarPool.HAND,
-          FamiliarPool.LEFT_HAND,
-          FamiliarPool.SCARECROW,
-          FamiliarPool.UNSPEAKACHU,
-          FamiliarPool.STOOPER,
-          FamiliarPool.DISGEIST,
-          FamiliarPool.BOWLET,
-          FamiliarPool.CORNBEEFADON,
-          FamiliarPool.MU -> false;
+              FamiliarPool.CHAMELEON,
+              FamiliarPool.HATRACK,
+              FamiliarPool.HAND,
+              FamiliarPool.LEFT_HAND,
+              FamiliarPool.SCARECROW,
+              FamiliarPool.UNSPEAKACHU,
+              FamiliarPool.STOOPER,
+              FamiliarPool.DISGEIST,
+              FamiliarPool.BOWLET,
+              FamiliarPool.CORNBEEFADON,
+              FamiliarPool.MU ->
+          false;
       default -> true;
     };
   }
@@ -1313,9 +1314,10 @@ public class FamiliarData implements Comparable<FamiliarData> {
   public boolean canEquipAny() {
     return switch (this.id) {
       case FamiliarPool.CHAMELEON,
-          FamiliarPool.GHOST_CAROLS,
-          FamiliarPool.GHOST_CHEER,
-          FamiliarPool.GHOST_COMMERCE -> false;
+              FamiliarPool.GHOST_CAROLS,
+              FamiliarPool.GHOST_CHEER,
+              FamiliarPool.GHOST_COMMERCE ->
+          false;
       default -> true;
     };
   }

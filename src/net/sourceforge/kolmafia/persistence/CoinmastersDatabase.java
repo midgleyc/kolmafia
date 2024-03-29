@@ -151,9 +151,10 @@ public class CoinmastersDatabase {
   private static int purchaseLimit(final int itemId) {
     return switch (itemId) {
       case ItemPool.ZEPPELIN_TICKET,
-          ItemPool.TALES_OF_DREAD,
-          ItemPool.BRASS_DREAD_FLASK,
-          ItemPool.SILVER_DREAD_FLASK -> 1;
+              ItemPool.TALES_OF_DREAD,
+              ItemPool.BRASS_DREAD_FLASK,
+              ItemPool.SILVER_DREAD_FLASK ->
+          1;
       default -> PurchaseRequest.MAX_QUANTITY;
     };
   }

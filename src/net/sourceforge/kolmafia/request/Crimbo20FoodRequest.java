@@ -26,10 +26,8 @@ public class Crimbo20FoodRequest extends CoinMasterRequest {
   private static Boolean canBuyItem(final Integer itemId) {
     AdventureResult item = ItemPool.get(itemId);
     return switch (itemId) {
-      case ItemPool.FOOD_DRIVE_BUTTON, ItemPool.FOOD_MAILING_LIST -> item.getCount(
-                  KoLConstants.closet)
-              + item.getCount(KoLConstants.inventory)
-          == 0;
+      case ItemPool.FOOD_DRIVE_BUTTON, ItemPool.FOOD_MAILING_LIST ->
+          item.getCount(KoLConstants.closet) + item.getCount(KoLConstants.inventory) == 0;
       default -> item.getCount(CRIMBO20FOOD.getBuyItems()) > 0;
     };
   }

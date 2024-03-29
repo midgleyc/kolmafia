@@ -131,16 +131,8 @@ public class Type extends Symbol {
 
   public boolean isStringLike() {
     return switch (this.getType()) {
-      case STRING,
-          BUFFER,
-          LOCATION,
-          STAT,
-          MONSTER,
-          ELEMENT,
-          COINMASTER,
-          PHYLUM,
-          BOUNTY,
-          MODIFIER -> true;
+      case STRING, BUFFER, LOCATION, STAT, MONSTER, ELEMENT, COINMASTER, PHYLUM, BOUNTY, MODIFIER ->
+          true;
       default -> false;
     };
   }

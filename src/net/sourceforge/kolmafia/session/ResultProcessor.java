@@ -175,16 +175,13 @@ public class ResultProcessor {
           if (monsterDrop.item().getItemId() == itemId) {
             String message =
                 switch (monsterDrop.flag()) {
-                  case NO_PICKPOCKET -> "Pickpocketed item "
-                      + name
-                      + " which is marked as non pickpocketable.";
-                  case CONDITIONAL -> "Pickpocketed item "
-                      + name
-                      + " which is marked as conditional.";
+                  case NO_PICKPOCKET ->
+                      "Pickpocketed item " + name + " which is marked as non pickpocketable.";
+                  case CONDITIONAL ->
+                      "Pickpocketed item " + name + " which is marked as conditional.";
                   case FIXED -> "Pickpocketed item " + name + " which is marked as fixed chance.";
-                  case STEAL_ACCORDION -> "Pickpocketed item "
-                      + name
-                      + " which is marked as accordion steal.";
+                  case STEAL_ACCORDION ->
+                      "Pickpocketed item " + name + " which is marked as accordion steal.";
                   case MULTI_DROP -> "Pickpocketed item " + name + " which is marked as multidrop.";
                   default -> null;
                 };
@@ -359,20 +356,21 @@ public class ResultProcessor {
       // If the effect is "Blessing of the Bird", KoL changes
       // it to "Blessing of the XXX", where XXX is today's bird
       switch (effectId) {
-        case EffectPool.BLESSING_OF_THE_BIRD -> updateBird(
-            EffectPool.BLESSING_OF_THE_BIRD, effectName, "_birdOfTheDay");
-        case EffectPool.BLESSING_OF_YOUR_FAVORITE_BIRD -> updateBird(
-            EffectPool.BLESSING_OF_YOUR_FAVORITE_BIRD, effectName, "yourFavoriteBird");
+        case EffectPool.BLESSING_OF_THE_BIRD ->
+            updateBird(EffectPool.BLESSING_OF_THE_BIRD, effectName, "_birdOfTheDay");
+        case EffectPool.BLESSING_OF_YOUR_FAVORITE_BIRD ->
+            updateBird(EffectPool.BLESSING_OF_YOUR_FAVORITE_BIRD, effectName, "yourFavoriteBird");
         case EffectPool.ENTAUNTAUNED,
-            EffectPool.BUZZED_ON_DISTILLATE,
-            EffectPool.WINE_FORTIFIED,
-            EffectPool.WINE_HOT,
-            EffectPool.WINE_FRISKY,
-            EffectPool.WINE_COLD,
-            EffectPool.WINE_FRIENDLY,
-            EffectPool.WINE_DARK,
-            EffectPool.WINE_BEFOULED,
-            EffectPool.CITIZEN_OF_A_ZONE -> DebugDatabase.readEffectDescriptionText(effectId);
+                EffectPool.BUZZED_ON_DISTILLATE,
+                EffectPool.WINE_FORTIFIED,
+                EffectPool.WINE_HOT,
+                EffectPool.WINE_FRISKY,
+                EffectPool.WINE_COLD,
+                EffectPool.WINE_FRIENDLY,
+                EffectPool.WINE_DARK,
+                EffectPool.WINE_BEFOULED,
+                EffectPool.CITIZEN_OF_A_ZONE ->
+            DebugDatabase.readEffectDescriptionText(effectId);
       }
 
       String acquisition = effectMatcher.group(2);

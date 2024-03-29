@@ -2284,8 +2284,8 @@ public class GenericRequest implements Runnable {
     String urlString = this.getURLString();
 
     return switch (this.baseURLString) {
-      case "adventure.php", "basement.php", "cellar.php", "mining.php" -> AdventureRequest
-          .getAdventuresUsed(urlString);
+      case "adventure.php", "basement.php", "cellar.php", "mining.php" ->
+          AdventureRequest.getAdventuresUsed(urlString);
       case "choice.php" -> ChoiceManager.getAdventuresUsed(urlString);
       case "place.php" -> PlaceRequest.getAdventuresUsed(urlString);
       case "campground.php" -> CampgroundRequest.getAdventuresUsed(urlString);
@@ -3003,12 +3003,13 @@ public class GenericRequest implements Runnable {
       case ItemPool.ARMORED_SEAL -> ItemPool.get(ItemPool.SEAL_BLUBBER_CANDLE, -10);
       case ItemPool.ANCIENT_SEAL -> ItemPool.get(ItemPool.SEAL_BLUBBER_CANDLE, -3);
       case ItemPool.SLEEK_SEAL,
-          ItemPool.SHADOWY_SEAL,
-          ItemPool.STINKING_SEAL,
-          ItemPool.CHARRED_SEAL,
-          ItemPool.COLD_SEAL,
-          ItemPool.SLIPPERY_SEAL,
-          ItemPool.DEPLETED_URANIUM_SEAL -> ItemPool.get(ItemPool.IMBUED_SEAL_BLUBBER_CANDLE, -1);
+              ItemPool.SHADOWY_SEAL,
+              ItemPool.STINKING_SEAL,
+              ItemPool.CHARRED_SEAL,
+              ItemPool.COLD_SEAL,
+              ItemPool.SLIPPERY_SEAL,
+              ItemPool.DEPLETED_URANIUM_SEAL ->
+          ItemPool.get(ItemPool.IMBUED_SEAL_BLUBBER_CANDLE, -1);
       default -> null;
     };
   }

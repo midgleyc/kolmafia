@@ -1787,9 +1787,9 @@ public class Maximizer {
   private static boolean excludedTCRSItem(int itemId) {
     return switch (itemId) {
       case ItemPool.DIETING_PILL ->
-      // Doubles adventures and stats from next food.  Also
-      // doubles fullness - which can be a surprise.
-      true;
+          // Doubles adventures and stats from next food.  Also
+          // doubles fullness - which can be a surprise.
+          true;
       default -> false;
     };
   }

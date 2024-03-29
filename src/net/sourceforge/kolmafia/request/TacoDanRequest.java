@@ -24,8 +24,8 @@ public class TacoDanRequest extends CoinMasterRequest {
   private static Boolean canBuyItem(final Integer itemId) {
     return switch (itemId) {
       case ItemPool.TACO_DAN_FISH_TACO -> Preferences.getString("questESlFish").equals("finished");
-      case ItemPool.TACO_DAN_TACO_SAUCE -> Preferences.getString("questESlSprinkles")
-          .equals("finished");
+      case ItemPool.TACO_DAN_TACO_SAUCE ->
+          Preferences.getString("questESlSprinkles").equals("finished");
       default -> ItemPool.get(itemId).getCount(TACO_DAN.getBuyItems()) > 0;
     };
   }

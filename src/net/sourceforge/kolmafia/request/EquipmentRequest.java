@@ -826,24 +826,26 @@ public class EquipmentRequest extends PasswordHashRequest {
       case BEDAZZLEMENTS -> KoLmafia.updateDisplay("Refreshing stickers...");
       case SAVE_OUTFIT -> KoLmafia.updateDisplay("Saving outfit: " + this.outfitName);
       case CHANGE_OUTFIT -> KoLmafia.updateDisplay("Putting on outfit: " + this.outfit);
-      case CHANGE_ITEM -> KoLmafia.updateDisplay(
-          (this.equipmentSlot == Slot.WEAPON
-                  ? "Wielding "
-                  : this.equipmentSlot == Slot.OFFHAND
-                      ? "Holding "
-                      : this.equipmentSlot == Slot.CARDSLEEVE
-                          ? "Sliding in "
-                          : this.equipmentSlot == Slot.HOLSTER ? "Holstering " : "Putting on ")
-              + ItemDatabase.getItemName(this.itemId)
-              + "...");
-      case REMOVE_ITEM -> KoLmafia.updateDisplay(
-          (this.equipmentSlot == Slot.CARDSLEEVE
-                  ? "Sliding out "
-                  : this.equipmentSlot == Slot.HOLSTER ? "Unholstering " : "Taking off ")
-              + (this.equipmentSlot == Slot.FAKEHAND
-                  ? "fake hands"
-                  : EquipmentManager.getEquipment(this.equipmentSlot).getName())
-              + "...");
+      case CHANGE_ITEM ->
+          KoLmafia.updateDisplay(
+              (this.equipmentSlot == Slot.WEAPON
+                      ? "Wielding "
+                      : this.equipmentSlot == Slot.OFFHAND
+                          ? "Holding "
+                          : this.equipmentSlot == Slot.CARDSLEEVE
+                              ? "Sliding in "
+                              : this.equipmentSlot == Slot.HOLSTER ? "Holstering " : "Putting on ")
+                  + ItemDatabase.getItemName(this.itemId)
+                  + "...");
+      case REMOVE_ITEM ->
+          KoLmafia.updateDisplay(
+              (this.equipmentSlot == Slot.CARDSLEEVE
+                      ? "Sliding out "
+                      : this.equipmentSlot == Slot.HOLSTER ? "Unholstering " : "Taking off ")
+                  + (this.equipmentSlot == Slot.FAKEHAND
+                      ? "fake hands"
+                      : EquipmentManager.getEquipment(this.equipmentSlot).getName())
+                  + "...");
       case UNEQUIP_ALL -> KoLmafia.updateDisplay("Taking off everything...");
     }
 

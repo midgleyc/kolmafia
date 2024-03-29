@@ -739,72 +739,73 @@ public class PocketDatabase {
     // collection, but since caller always knows it, pass in
     return switch (type) {
       case SCRAP ->
-      // Sort on scrap index.
-      pockets.values().stream()
-          .sorted(Comparator.comparing(p -> ((ScrapPocket) p).getScrap()))
-          .collect(Collectors.toList());
+          // Sort on scrap index.
+          pockets.values().stream()
+              .sorted(Comparator.comparing(p -> ((ScrapPocket) p).getScrap()))
+              .collect(Collectors.toList());
       case MEAT ->
-      // Sort on Meat
-      pockets.values().stream()
-          .sorted(Comparator.comparing(p -> ((MeatPocket) p).getMeat()))
-          .collect(Collectors.toList());
+          // Sort on Meat
+          pockets.values().stream()
+              .sorted(Comparator.comparing(p -> ((MeatPocket) p).getMeat()))
+              .collect(Collectors.toList());
       case POEM ->
-      // Sort on line index
-      pockets.values().stream()
-          .sorted(Comparator.comparing(p -> ((PoemPocket) p).getIndex()))
-          .collect(Collectors.toList());
+          // Sort on line index
+          pockets.values().stream()
+              .sorted(Comparator.comparing(p -> ((PoemPocket) p).getIndex()))
+              .collect(Collectors.toList());
       case MONSTER ->
-      // Sort on monster name
-      pockets.values().stream()
-          .sorted(
-              Comparator.comparing(p -> ((MonsterPocket) p).getMonster().getName().toLowerCase()))
-          .collect(Collectors.toList());
+          // Sort on monster name
+          pockets.values().stream()
+              .sorted(
+                  Comparator.comparing(
+                      p -> ((MonsterPocket) p).getMonster().getName().toLowerCase()))
+              .collect(Collectors.toList());
       case ITEM,
-          AVATAR,
-          BELL,
-          BOOZE,
-          CASH,
-          CHESS,
-          CHOCO,
-          FOOD,
-          FRUIT,
-          OYSTER,
-          POTION,
-          YEG,
-          EFFECT,
-          RESTORE,
-          BUFF,
-          CANDY1,
-          CANDY2,
-          CHIPS1,
-          GUM1,
-          LENS1,
-          NEEDLE1,
-          TEETH1 ->
-      // Single results with a single source sort on effect name
-      pockets.values().stream()
-          .sorted(Comparator.comparing(p -> ((OneResultPocket) p).getResult1().getName()))
-          .collect(Collectors.toList());
+              AVATAR,
+              BELL,
+              BOOZE,
+              CASH,
+              CHESS,
+              CHOCO,
+              FOOD,
+              FRUIT,
+              OYSTER,
+              POTION,
+              YEG,
+              EFFECT,
+              RESTORE,
+              BUFF,
+              CANDY1,
+              CANDY2,
+              CHIPS1,
+              GUM1,
+              LENS1,
+              NEEDLE1,
+              TEETH1 ->
+          // Single results with a single source sort on effect name
+          pockets.values().stream()
+              .sorted(Comparator.comparing(p -> ((OneResultPocket) p).getResult1().getName()))
+              .collect(Collectors.toList());
       case COMMON, ELEMENT ->
-      // Single effects with multiple sources sort first on effect name then on pocket number
-      pockets.values().stream()
-          .sorted(
-              Comparator.comparing(p -> ((OneResultPocket) p).getResult1().getName())
-                  .thenComparing(p -> ((Pocket) p).getPocket()))
-          .collect(Collectors.toList());
+          // Single effects with multiple sources sort first on effect name then on pocket number
+          pockets.values().stream()
+              .sorted(
+                  Comparator.comparing(p -> ((OneResultPocket) p).getResult1().getName())
+                      .thenComparing(p -> ((Pocket) p).getPocket()))
+              .collect(Collectors.toList());
       case ITEM2, CANDY, CHIPS, GUM, LENS, NEEDLE, TEETH ->
-      // Two results sort first on result 1 then on result 2
-      pockets.values().stream()
-          .sorted(
-              Comparator.comparing(p -> ((TwoResultPocket) p).getResult1().getName())
-                  .thenComparing(p -> ((TwoResultPocket) p).getResult2().getName()))
-          .collect(Collectors.toList());
+          // Two results sort first on result 1 then on result 2
+          pockets.values().stream()
+              .sorted(
+                  Comparator.comparing(p -> ((TwoResultPocket) p).getResult1().getName())
+                      .thenComparing(p -> ((TwoResultPocket) p).getResult2().getName()))
+              .collect(Collectors.toList());
         // I can't think of a rational full ordering for stats
       case STATS, JOKE ->
-      // Pocket number is good enough
-      pockets.values().stream()
-          .sorted(Comparator.comparing(Pocket::getPocket))
-          .collect(Collectors.toList());
+          // Pocket number is good enough
+          pockets.values().stream()
+              .sorted(Comparator.comparing(Pocket::getPocket))
+              .collect(Collectors.toList());
     };
   }
 
