@@ -5,10 +5,11 @@ import java.util.Map;
 import net.sourceforge.kolmafia.RequestLogger;
 import org.htmlcleaner.BaseToken;
 import org.htmlcleaner.CleanerProperties;
-import org.htmlcleaner.CommentNode;
-import org.htmlcleaner.ContentNode;
 import org.htmlcleaner.HtmlCleaner;
-import org.htmlcleaner.TagNode;
+import org.jsoup.nodes.Attribute;
+import org.jsoup.nodes.Comment;
+import org.jsoup.nodes.Node;
+import org.jsoup.nodes.TextNode;
 
 public class HTMLParserUtils {
   private HTMLParserUtils() {}
@@ -26,15 +27,15 @@ public class HTMLParserUtils {
 
   // Log cleaned HTML
 
-  public static final void logHTML(final TagNode node) {
+  public static final void logHTML(final Node node) {
     if (node != null) {
       StringBuffer buffer = new StringBuffer();
       HTMLParserUtils.logHTML(node, buffer, 0);
     }
   }
 
-  private static void logHTML(final TagNode node, final StringBuffer buffer, int level) {
-    String name = node.getName();
+  private static void logHTML(final Node node, final StringBuffer buffer, int level) {
+    String name = node.nodeName();
 
     // Skip scripts
     if (name.equals("script")) {
@@ -45,12 +46,12 @@ public class HTMLParserUtils {
     HTMLParserUtils.printTag(buffer, node);
     RequestLogger.updateDebugLog(buffer.toString());
 
-    Iterator<? extends BaseToken> it = node.getAllChildren().iterator();
+    Iterator<Node> it = node.childNodes().iterator();
     while (it.hasNext()) {
-      BaseToken child = it.next();
+      Node child = it.next();
 
-      if (child instanceof CommentNode object) {
-        String content = object.getContent();
+      if (child instanceof Comment object) {
+        String content = object.getData();
         HTMLParserUtils.indent(buffer, level + 1);
         buffer.append("<!--");
         buffer.append(content);
@@ -59,8 +60,8 @@ public class HTMLParserUtils {
         continue;
       }
 
-      if (child instanceof ContentNode object) {
-        String content = object.getContent().trim();
+      if (child instanceof TextNode object) {
+        String content = object.text().trim();
         if (content.equals("")) {
           continue;
         }
@@ -71,9 +72,7 @@ public class HTMLParserUtils {
         continue;
       }
 
-      if (child instanceof TagNode object) {
-        HTMLParserUtils.logHTML(object, buffer, level + 1);
-      }
+      HTMLParserUtils.logHTML(child, buffer, level + 1);
     }
   }
 
@@ -85,23 +84,21 @@ public class HTMLParserUtils {
     }
   }
 
-  private static void printTag(final StringBuffer buffer, TagNode node) {
-    String name = node.getName();
-    Map<String, String> attributes = node.getAttributes();
+  private static void printTag(final StringBuffer buffer, Node node) {
+    String name = node.nodeName();
+    var attributes = node.attributes();
 
     buffer.append("<");
     buffer.append(name);
 
     if (!attributes.isEmpty()) {
-      Iterator<String> it = attributes.keySet().iterator();
-      while (it.hasNext()) {
-        String key = it.next();
-        buffer.append(" ");
-        buffer.append(key);
-        buffer.append("=\"");
-        buffer.append(attributes.get(key));
-        buffer.append("\"");
-      }
+        for (Attribute attr : attributes) {
+            buffer.append(" ");
+            buffer.append(attr.getKey());
+            buffer.append("=\"");
+            buffer.append(attr.getValue());
+            buffer.append("\"");
+        }
     }
     buffer.append(">");
   }

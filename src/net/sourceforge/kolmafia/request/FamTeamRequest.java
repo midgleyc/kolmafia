@@ -20,6 +20,8 @@ import net.sourceforge.kolmafia.utilities.StringUtilities;
 import org.htmlcleaner.CleanerProperties;
 import org.htmlcleaner.HtmlCleaner;
 import org.htmlcleaner.TagNode;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Element;
 
 public class FamTeamRequest extends GenericRequest {
   private static final Pattern ACTIVE_PATTERN =
@@ -259,9 +261,9 @@ public class FamTeamRequest extends GenericRequest {
     // prune things, perhaps
   }
 
-  private static TagNode cleanPokeTeamHTML(final String text) {
+  private static Element cleanPokeTeamHTML(final String text) {
     // Clean the HTML on this response page
-    return cleaner.clean(text);
+    return Jsoup.parse(text);
   }
 
   /*
@@ -303,7 +305,7 @@ public class FamTeamRequest extends GenericRequest {
   */
 
   private static void parsePokeTeamData(final String famtable, boolean logit) {
-    TagNode node = FamTeamRequest.cleanPokeTeamHTML(famtable);
+    Element node = FamTeamRequest.cleanPokeTeamHTML(famtable);
     if (node == null) {
       return;
     }

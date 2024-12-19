@@ -98,6 +98,7 @@ dependencies {
 	implementation 'com.jgoodies:jgoodies-binding:2.13.0'
 	implementation 'org.eclipse.jgit:org.eclipse.jgit:6.10.0.202406032230-r'
 	implementation 'org.eclipse.jgit:org.eclipse.jgit.ssh.apache:6.10.0.202406032230-r'
+	implementation 'org.jsoup:jsoup:1.18.3'
 }
 
 application {
