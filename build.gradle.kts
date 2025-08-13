@@ -369,8 +369,8 @@ tasks.jpackage {
     winPerUserInstall = true
     javaOptions = listOf("-DuseCWDasROOT=true")
   }
-  mainJar = "KoLmafia-" + project.version.toString() + (if (isDirty()) "-M" else "") + ".jar"
-  appVersion = SimpleDateFormat("yy.MM").format(Date()) + "." + project.version.toString()
+  mainJar = "KoLmafia-" + lastRevision() + (if (isDirty()) "-M" else "") + ".jar"
+  appVersion = SimpleDateFormat("yy.MM").format(Date()) + "." + lastRevision()
 }
 
 tasks.clean {

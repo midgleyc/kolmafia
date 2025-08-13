@@ -28,6 +28,11 @@ jobs:
           java-version: "21"
           cache: "gradle"
 
+      - name: Get version
+        env:
+          ORG_GRADLE_PROJECT_commit: ${{ github.sha }}
+        run: ./gradlew --no-daemon --info --stacktrace getRevision
+
       - name: Build
         env:
           ORG_GRADLE_PROJECT_commit: ${{ github.sha }}
