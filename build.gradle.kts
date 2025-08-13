@@ -369,10 +369,7 @@ tasks.jpackage {
     winPerUserInstall = true
     javaOptions = listOf("-DuseCWDasROOT=true")
   }
-  doFirst {
-    val shadowJarTask = tasks.named<ShadowJar>("shadowJar").get()
-    mainJar = shadowJarTask.archiveFileName.get()
-  }
+  mainJar = tasks.jar.get().archiveFileName.get()
   appVersion = SimpleDateFormat("yy.MM").format(Date()) + "." + lastRevision()
 }
 
