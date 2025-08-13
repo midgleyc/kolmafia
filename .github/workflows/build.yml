@@ -10,7 +10,6 @@ concurrency:
 
 jobs:
   bin:
-    if: github.repository == 'kolmafia/kolmafia'
     name: Build Binaries
     runs-on: ${{ matrix.os }}
     strategy:
@@ -32,19 +31,9 @@ jobs:
       - name: Build
         env:
           ORG_GRADLE_PROJECT_commit: ${{ github.sha }}
-        run: ./gradlew --no-daemon jpackage
-
-      - name: Upload binaries
-        uses: actions/upload-artifact@v4
-        with:
-          name: releases-${{ matrix.os }}
-          path: |
-            build/releases/*.deb
-            build/releases/*.exe
-            build/releases/*.dmg
+        run: ./gradlew --no-daemon --info --stacktrace jpackage
 
   jar:
-    if: github.repository == 'kolmafia/kolmafia'
     name: Build Release
     runs-on: ubuntu-latest
 
@@ -64,7 +53,7 @@ jobs:
       - name: Build
         env:
           ORG_GRADLE_PROJECT_commit: ${{ github.sha }}
-        run: ./gradlew --no-daemon shadowJar
+        run: ./gradlew --no-daemon --info --stacktrace shadowJar
 
       - name: Upload files
         uses: actions/upload-artifact@v4
