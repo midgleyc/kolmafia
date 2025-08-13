@@ -1,4 +1,5 @@
 // -*- mode: kotlin -*-
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.panteleyev.jpackage.ImageType
@@ -368,7 +369,8 @@ tasks.jpackage {
     winPerUserInstall = true
     javaOptions = listOf("-DuseCWDasROOT=true")
   }
-  mainJar = tasks.shadowJar.get().archiveFileName.get()
+  val shadowJarTask = tasks.named<ShadowJar>("shadowJar")
+  mainJar = shadowJarTask.flatMap { it.archiveFileName }.get()
   appVersion = SimpleDateFormat("yy.MM").format(Date()) + "." + lastRevision()
 }
 
