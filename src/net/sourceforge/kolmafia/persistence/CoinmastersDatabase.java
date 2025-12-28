@@ -305,7 +305,7 @@ public class CoinmastersDatabase {
       final CoinmasterData data, final ShopRow shopRow) {
     // "Manual" rows are visible in CoinmastersFrame, but do not get a
     // Concoction or PurchaseRequest - as is used by acquire and such.
-    if (data.manualOnlyRow(shopRow)) {
+    if (shopRow.isManual()) {
       return;
     }
 

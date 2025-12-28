@@ -22,11 +22,17 @@ public class ShopRow implements Comparable<ShopRow> {
   private int row;
   private AdventureResult item;
   private AdventureResult[] costs;
+  private boolean manual;
 
-  public ShopRow(int row, AdventureResult item, AdventureResult... costs) {
+  public ShopRow(int row, boolean manual, AdventureResult item, AdventureResult... costs) {
     this.row = row;
+    this.manual = manual;
     this.item = item;
     this.costs = costs;
+  }
+
+  public ShopRow(int row, AdventureResult item, AdventureResult... costs) {
+    this(row, false, item, costs);
   }
 
   public int getRow() {
@@ -47,6 +53,10 @@ public class ShopRow implements Comparable<ShopRow> {
 
   public void setCosts(AdventureResult[] costs) {
     this.costs = costs;
+  }
+
+  public boolean isManual() {
+    return this.manual;
   }
 
   public boolean isMeatPurchase() {
@@ -539,12 +549,21 @@ public class ShopRow implements Comparable<ShopRow> {
     if (data.length < 4) {
       return null;
     }
-    if (!data[1].startsWith("ROW")) {
-      return null;
-    }
 
     String master = data[0];
-    int row = Integer.valueOf(data[1].substring(3));
+    int row = -1;
+    boolean manual = false;
+    String[] tags = data[1].split("\\s*,\\s*");
+    for (String tag : tags) {
+      if (tag.equals("MANUAL")) {
+        manual = true;
+      } else if (tag.startsWith("ROW")) {
+        row = Integer.valueOf(tag.substring(3));
+      }
+    }
+    if (row == -1) {
+      return null;
+    }
     AdventureResult item = ShopRowDatabase.parseItemOrMeatOrSkill(data[2]);
     List<AdventureResult> costs = new ArrayList<>();
     for (int index = 3; index < data.length; ++index) {
@@ -555,6 +574,6 @@ public class ShopRow implements Comparable<ShopRow> {
       }
       costs.add(cost);
     }
-    return new ShopRow(row, item, costs.toArray(new AdventureResult[0]));
+    return new ShopRow(row, manual, item, costs.toArray(new AdventureResult[0]));
   }
 }
